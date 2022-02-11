@@ -1,0 +1,205 @@
+﻿@model TrainTicket.Models.TicketInformation
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Project Add</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Assets/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Assets/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+
+
+       
+
+
+            <!-- Main content -->
+        <section class="content">
+            <form asp-action="Create">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">General</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputName">Train Name</label>
+                                    <input type="text" asp-for="TrainName" id="inputName" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputDescription">Journey Time</label>
+                                    <input asp-for="JourneyTime" id="inputDescription" class="form-control" rows="4">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Station</label>
+                                    <select id="inputStatus" class="form-control custom-select" asp-for="StationID" asp-items="@(new SelectList(ViewBag.StationName, "StationID","Stations"))">
+                                        <option selected disabled>Select one</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputClientCompany">Class</label>
+                                    <select id="inputStatus" class="form-control custom-select" asp-for="SitClass">
+                                        <option selected disabled>Select one</option>
+                                        <option>Shovon</option>
+                                        <option>Chaiar</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputProjectLeader">Avl Sit</label>
+                                    <input type="number" id="inputProjectLeader" class="form-control" asp-for="TotalSit">
+                                </div>
+                                <div class="form-group">
+                                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                                    <input type="submit" value="Create Avl Ticket" class="btn btn-success float-right">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+            </form>
+        </section>
+    </div>
+   
+   
+    <!-- /.content -->
+
+
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Assets/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!--<script src="~/Assets/dist/js/demo.js"></script>-->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<h1>Create</h1>
+
+<h4>TicketInformation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TrainName" class="control-label"></label>
+                <input asp-for="TrainName" class="form-control" />
+                <span asp-validation-for="TrainName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JourneyTime" class="control-label"></label>
+                <input asp-for="JourneyTime" class="form-control" />
+                <span asp-validation-for="JourneyTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalSit" class="control-label"></label>
+                <input asp-for="TotalSit" class="form-control" />
+                <span asp-validation-for="TotalSit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SitClass" class="control-label"></label>
+                <input asp-for="SitClass" class="form-control" />
+                <span asp-validation-for="SitClass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StationID" class="control-label"></label>
+                <select asp-for="StationID" class="form-control" asp-items="@(new SelectList(ViewBag.StationName, "StationID","Stations"))"></select>-->
+                @*<span asp-validation-for="StationID" class="text-danger"></span>*@
+            <!--</div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
