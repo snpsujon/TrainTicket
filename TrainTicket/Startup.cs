@@ -54,7 +54,7 @@ namespace TrainTicket
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Ticket}/{action=Index}/{id?}");
             });
         }
     }
