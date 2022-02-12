@@ -308,3 +308,7 @@ H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\TrainTicket.pdb
 H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\TrainTicket.genruntimeconfig.cache
 H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Stations\Index.cshtml.g.cs
 H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Stations\Create.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Stations\Create.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Stations\Index.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Trains\Index.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Trains\Create.cshtml.g.cs

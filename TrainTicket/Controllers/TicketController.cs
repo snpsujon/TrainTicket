@@ -20,18 +20,9 @@ namespace TrainTicket.Controllers
         }
         public IActionResult Index()
         {
-            var TicInf = from a in _context.ticketInformations
-                         join b in _context.stations
-                         on a.StationID equals b.StationID
+            var TicInf = _context.ticketInformations.ToList();
 
-                         select new AvlTickInsVM
-                         {
-                             TrainName = a.TrainName,
-                             JourneyTime = a.JourneyTime,
-                             TotalSit = a.TotalSit,
-                             SitClass = a.SitClass,
-                             StationName = b.Stations,
-                         };
+
             return View(TicInf);
         }
 
@@ -67,9 +58,10 @@ namespace TrainTicket.Controllers
             {
                 List<Station> stations = new List<Station>();
                 stations = _context.stations.ToList();
+                List<Train> trains = new List<Train>();
+                trains = _context.trains.ToList();
 
-
-
+                ViewBag.TrainName = trains;
                 ViewBag.StationName = stations;
             }
             catch (Exception ex)
@@ -78,6 +70,8 @@ namespace TrainTicket.Controllers
                 
             }
         }
+        
+        
 
 
      }

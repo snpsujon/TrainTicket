@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace TrainTicket.Models
 {
-    public class Station
+    public class Train
     {
         [Key]
-        public int StationID { get; set; }
-        public string Stations { get; set; }
-        
-        
-
+        public int TrainID { get; set; }
+        public string TrainName { get; set; }
     }
 }

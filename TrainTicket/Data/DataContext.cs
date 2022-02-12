@@ -17,5 +17,8 @@ namespace TrainTicket.Data
         public DbSet<SellerInformation> sellerInformations { get; set; }
         public DbSet<BuyerInformation> buyerInformations { get; set; }
         public DbSet<BookingInformation> bookingInformations { get; set; }
+        public DbSet<Train> trains { get; set; }
+        //public DbSet<FromStations> fromStations { get; set; }
+        //public DbSet<ToStation> toStations { get; set; }
     }
 }

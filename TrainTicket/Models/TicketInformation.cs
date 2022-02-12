@@ -11,11 +11,12 @@ namespace TrainTicket.Models
     {
         [Key]
         public int TicketID { get; set; }
-        public String TrainName { get; set; }
+        public string TrainName { get; set; }
         public DateTime JourneyTime{ get; set; }
         public int TotalSit{ get; set; }
         public string SitClass { get; set; }
-        public int StationID{ get; set; }
+        public string FStarionName { get; set; }
+        public string TStationName{ get; set; }
         public int SellerID { get; set; }
 
 

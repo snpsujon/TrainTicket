@@ -13,10 +13,7 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/Assets/plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/Assets/dist/css/adminlte.min.css">
+  
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -35,7 +32,7 @@
                     <div class="col-md-6">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">General</h3>
+                                <h3 class="card-title">Add Avl Tickets</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -45,20 +42,35 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputName">Train Name</label>
-                                    <input type="text" asp-for="TrainName" id="inputName" class="form-control">
+                                    <label for="inputStatus">Train Name</label>
+                                    <select id="inputStatus" class="form-control custom-select" asp-for="TrainName" asp-items="@(new SelectList(ViewBag.TrainName, "TrainName","TrainName"))">
+                                        <option selected disabled>Select one</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDescription">Journey Time</label>
                                     <input asp-for="JourneyTime" id="inputDescription" class="form-control" rows="4">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputStatus">Station</label>
-                                    <select id="inputStatus" class="form-control custom-select" asp-for="StationID" asp-items="@(new SelectList(ViewBag.StationName, "StationID","Stations"))">
+                                    <label for="inputStatus">From Station</label>
+                                    <select id="inputStatus" class="form-control custom-select" asp-for="FStarionName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))">
                                         <option selected disabled>Select one</option>
-
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">To Station</label>
+                                    <select id="inputStatus" class="form-control custom-select" asp-for="TStationName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))">
+                                        <option selected disabled>Select one</option>
+                                    </select>
+                                </div>
+
+                                @*<div class="form-group">
+                                    <label for="inputStatus">Station</label>
+                                    <select id="inputStatus" class="form-control custom-select" asp-for="FromStationID" asp-items="@(new SelectList(ViewBag.StationName, "StationID","Stations"))">
+                                        <option selected disabled>Select one</option>
+                                    </select>
+                                </div>*@
+
                                 <div class="form-group">
                                     <label for="inputClientCompany">Class</label>
                                     <select id="inputStatus" class="form-control custom-select" asp-for="SitClass">
@@ -90,14 +102,7 @@
 
 
     <!-- ./wrapper -->
-    <!-- jQuery -->
-    <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="~/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/Assets/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <!--<script src="~/Assets/dist/js/demo.js"></script>-->
+    
 </body>
 </html>
 
