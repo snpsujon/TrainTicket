@@ -10,7 +10,7 @@ using TrainTicket.Data;
 namespace TrainTicket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220214080229_init")]
+    [Migration("20220214080854_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,6 +129,9 @@ namespace TrainTicket.Migrations
 
                     b.Property<DateTime>("JourneyTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PerTicketPrice")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SellerID")
                         .HasColumnType("int");

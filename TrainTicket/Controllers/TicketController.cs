@@ -18,12 +18,38 @@ namespace TrainTicket.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(DateTime SearchbyDate)
         {
+            
             var TicInf = _context.ticketInformations.ToList();
-
+            var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
+            ViewBag.TotalTicket = TotalTicket;
+            var msg = "Total Avl Ticket";
+            ViewBag.msg = msg;
+            var date = SearchbyDate;
+            
+            if (date.ToString() != "1/1/0001 12:00:00 AM")
+            {
+                var searchdate = _context.ticketInformations.Where(x => x.JourneyTime > date || x.JourneyTime == date).ToList();
+                if (searchdate.Count != 0)
+                {
+                    var dates = SearchbyDate.ToString("dd MMMM yyyy");
+                    ViewBag.msg = "Total Avl Tickets On " + dates;
+                    TotalTicket = searchdate.Sum(p => p.TotalSit);
+                    ViewBag.TotalTicket = TotalTicket;
+                    return View(searchdate);
+                }
+                else
+                {
+                    ViewBag.TotalTicket = "No Avl Ticket";
+                    return View(TicInf);
+                }
+            }
 
             return View(TicInf);
+
+
+
         }
 
         public IActionResult Create()
@@ -54,8 +80,7 @@ namespace TrainTicket.Controllers
 
         private void loadDDL()
         {
-            try
-            {
+           
                 List<Station> stations = new List<Station>();
                 stations = _context.stations.ToList();
                 List<Train> trains = new List<Train>();
@@ -63,12 +88,7 @@ namespace TrainTicket.Controllers
 
                 ViewBag.TrainName = trains;
                 ViewBag.StationName = stations;
-            }
-            catch (Exception ex)
-            {
-
-                
-            }
+           
         }
         
         

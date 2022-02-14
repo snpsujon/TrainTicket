@@ -83,7 +83,8 @@ namespace TrainTicket.Migrations
                     SitClass = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FStarionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TStationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SellerID = table.Column<int>(type: "int", nullable: false)
+                    SellerID = table.Column<int>(type: "int", nullable: false),
+                    PerTicketPrice = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

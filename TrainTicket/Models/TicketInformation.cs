@@ -18,6 +18,7 @@ namespace TrainTicket.Models
         public string FStarionName { get; set; }
         public string TStationName{ get; set; }
         public int SellerID { get; set; }
+        public string PerTicketPrice { get; set; }
 
 
         [NotMapped]

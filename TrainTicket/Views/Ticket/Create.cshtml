@@ -21,10 +21,10 @@
 
 
 
-       
 
 
-            <!-- Main content -->
+
+        <!-- Main content -->
         <section class="content">
             <form asp-action="Create">
                 <div class="row">
@@ -43,7 +43,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputStatus">Train Name</label>
-                                    <select id="inputStatus" class="form-control custom-select" asp-for="TrainName" asp-items="@(new SelectList(ViewBag.TrainName, "TrainName","TrainName"))">
+                                    <select id="trainName" class="form-control custom-select ab" asp-for="TrainName" asp-items="@(new SelectList(ViewBag.TrainName, "TrainName","TrainName"))" required>
                                         <option selected disabled>Select one</option>
                                     </select>
                                 </div>
@@ -53,27 +53,27 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputStatus">From Station</label>
-                                    <select id="inputStatus" class="form-control custom-select" asp-for="FStarionName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))">
+                                    <select id="fStation" class="form-control custom-select ab" asp-for="FStarionName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))" required>
                                         <option selected disabled>Select one</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputStatus">To Station</label>
-                                    <select id="inputStatus" class="form-control custom-select" asp-for="TStationName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))">
+                                    <select id="tStation" class="form-control custom-select ab" asp-for="TStationName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))" required>
                                         <option selected disabled>Select one</option>
                                     </select>
                                 </div>
 
                                 @*<div class="form-group">
-                                    <label for="inputStatus">Station</label>
-                                    <select id="inputStatus" class="form-control custom-select" asp-for="FromStationID" asp-items="@(new SelectList(ViewBag.StationName, "StationID","Stations"))">
-                                        <option selected disabled>Select one</option>
-                                    </select>
-                                </div>*@
+                                        <label for="inputStatus">Station</label>
+                                        <select id="inputStatus" class="form-control custom-select" asp-for="FromStationID" asp-items="@(new SelectList(ViewBag.StationName, "StationID","Stations"))">
+                                            <option selected disabled>Select one</option>
+                                        </select>
+                                    </div>*@
 
                                 <div class="form-group">
                                     <label for="inputClientCompany">Class</label>
-                                    <select id="inputStatus" class="form-control custom-select" asp-for="SitClass">
+                                    <select id="sit" class="form-control custom-select ab" asp-for="SitClass" required>
                                         <option selected disabled>Select one</option>
                                         <option>Shovon</option>
                                         <option>Chaiar</option>
@@ -82,11 +82,16 @@
 
                                 <div class="form-group">
                                     <label for="inputProjectLeader">Avl Sit</label>
-                                    <input type="number" id="inputProjectLeader" class="form-control" asp-for="TotalSit">
+                                    <input type="number" id="inputProjectLeader" class="form-control" asp-for="TotalSit" required>
                                 </div>
                                 <div class="form-group">
-                                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-                                    <input type="submit" value="Create Avl Ticket" class="btn btn-success float-right">
+                                    <label for="inputProjectLeader">Per Ticket Price</label>
+                                    <input type="number" id="inputProjectLeader" class="form-control" asp-for="PerTicketPrice" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <a asp-action="Index" class="btn btn-secondary ">Back to List</a>
+                                    <input type="submit" value="Create Avl Ticket" class="btn btn-success float-right is-disabled" id="myBtn">
                                 </div>
                             </div>
                         </div>
@@ -99,10 +104,29 @@
         </section>
     </div>
     <!-- /.content -->
-
-
     <!-- ./wrapper -->
-    
+  
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
 </body>
 </html>
 
