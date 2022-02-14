@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrainTicket.Migrations
 {
-    public partial class ticket : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,12 +81,26 @@ namespace TrainTicket.Migrations
                     JourneyTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalSit = table.Column<int>(type: "int", nullable: false),
                     SitClass = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StationID = table.Column<int>(type: "int", nullable: false),
+                    FStarionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TStationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SellerID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ticketInformations", x => x.TicketID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "trains",
+                columns: table => new
+                {
+                    TrainID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TrainName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_trains", x => x.TrainID);
                 });
         }
 
@@ -106,6 +120,9 @@ namespace TrainTicket.Migrations
 
             migrationBuilder.DropTable(
                 name: "ticketInformations");
+
+            migrationBuilder.DropTable(
+                name: "trains");
         }
     }
 }

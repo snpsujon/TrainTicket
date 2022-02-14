@@ -10,8 +10,8 @@ using TrainTicket.Data;
 namespace TrainTicket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220211192431_ticket111")]
-    partial class ticket111
+    [Migration("20220214080229_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,21 +73,6 @@ namespace TrainTicket.Migrations
                     b.HasKey("BuyerID");
 
                     b.ToTable("buyerInformations");
-                });
-
-            modelBuilder.Entity("TrainTicket.Models.FromStations", b =>
-                {
-                    b.Property<int>("FromStaionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("FStarionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FromStaionID");
-
-                    b.ToTable("fromStations");
                 });
 
             modelBuilder.Entity("TrainTicket.Models.SellerInformation", b =>
@@ -157,27 +142,12 @@ namespace TrainTicket.Migrations
                     b.Property<int>("TotalSit")
                         .HasColumnType("int");
 
-                    b.Property<int>("TrainID")
-                        .HasColumnType("int");
+                    b.Property<string>("TrainName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TicketID");
 
                     b.ToTable("ticketInformations");
-                });
-
-            modelBuilder.Entity("TrainTicket.Models.ToStation", b =>
-                {
-                    b.Property<int>("ToStaionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("StationID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ToStaionID");
-
-                    b.ToTable("toStations");
                 });
 
             modelBuilder.Entity("TrainTicket.Models.Train", b =>
