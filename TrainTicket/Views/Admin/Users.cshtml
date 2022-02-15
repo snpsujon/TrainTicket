@@ -1,0 +1,131 @@
+﻿@model IEnumerable<TrainTicket.Models.UserInformation>
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+
+
+}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | DataTables</title>
+
+    <style>
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background: transparent;
+            bottom: 0;
+            color: transparent;
+            cursor: pointer;
+            height: auto;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: auto;
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+
+
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Users Informations</h3><br />
+                <a asp-controller="Home" asp-action="Create" class="btn btn-success">Create New User</a>
+                <div class="col-12 col-sm-4 float-right">
+                    <div class="info-box bg-light">
+                        <div class="info-box-content">
+                            <span class="info-box-text text-center text-muted">Total Users</span>
+
+                            <span id="not" class="info-box-number text-center mb-0">@ViewBag.TotalUsers</span>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+
+
+
+
+                <div id="example1" class="dataTables_wrapper dt-bootstrap4">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search By Email.." title="Type in a name" class="float-right">
+
+
+                    <table id="example1_wrapper" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th>User Type</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.UserFullName)</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserPhoneNumber)
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.UserEmail)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UserType)</td>
+                                    <td>
+                                        <a asp-action="EditUser" asp-route-id="@item.UserID" class="btn btn-secondary">Edit User</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("example1_wrapper");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+

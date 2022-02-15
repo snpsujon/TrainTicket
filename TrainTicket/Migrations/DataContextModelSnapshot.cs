@@ -173,6 +173,9 @@ namespace TrainTicket.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserEmail")
                         .HasColumnType("nvarchar(max)");
 

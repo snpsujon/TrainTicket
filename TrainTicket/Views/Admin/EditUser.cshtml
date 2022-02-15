@@ -1,0 +1,172 @@
+﻿@model TrainTicket.Models.UserInformation
+
+@{
+    ViewData["Title"] = "EditUser";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Project Add</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper container">
+
+
+
+
+
+
+        <!-- Main content -->
+        <section class="content">
+            <form asp-action="EditUser">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Edit User Informations</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputStatus">Full Name</label>
+                                    <input id="inputProjectLeader" class="form-control" asp-for="UserFullName" required>
+                                    <input asp-for="UserID" class="form-control" hidden />
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputDescription">Phone Number</label>
+                                    <input asp-for="UserPhoneNumber" id="inputDescription" class="form-control" rows="4">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Email</label>
+                                    <input type="email" id="inputProjectLeader" class="form-control" asp-for="UserEmail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputStatus">Password</label>
+                                    <input type="text" id="inputProjectLeader" class="form-control" asp-for="UserPassword" required>
+                                </div>
+
+                               
+
+                                
+
+                                <div class="form-group">
+                                    <label for="inputProjectLeader">User Type</label>
+                                    <select id="trainName" class="form-control custom-select ab" asp-for="UserType" asp-items="@(new SelectList(ViewBag.UserTypes, "UserTypeN","UserTypeN"))" required>
+                                        <option selected disabled>Select one</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <a asp-action="Users" class="btn btn-secondary ">Back to List</a>
+                                    <input type="submit" value="Edit User" class="btn btn-success float-right is-disabled" id="myBtn">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+            </form>
+        </section>
+    </div>
+    <!-- /.content -->
+    <!-- ./wrapper -->
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<h1>EditUser</h1>
+
+<h4>UserInformation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserFullName" class="control-label"></label>
+                <input asp-for="UserFullName" class="form-control" />
+                <input asp-for="UserID" class="form-control" hidden />
+                <span asp-validation-for="UserFullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPhoneNumber" class="control-label"></label>
+                <input asp-for="UserPhoneNumber" class="form-control" />
+                <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserEmail" class="control-label"></label>
+                <input asp-for="UserEmail" class="form-control" />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPassword" class="control-label"></label>
+                <input asp-for="UserPassword" class="form-control" />
+                <span asp-validation-for="UserPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserType" class="control-label"></label>
+                <select id="trainName" class="form-control custom-select ab" asp-for="UserType" asp-items="@(new SelectList(ViewBag.UserTypes, "UserTypeN","UserTypeN"))" required>
+                    <option selected disabled>Select one</option>
+                </select>
+                <span asp-validation-for="UserType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>*@
+
+@*<div>
+    <a asp-action="Users">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

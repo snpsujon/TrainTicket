@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,8 +21,12 @@ namespace TrainTicket.Models
         [Compare("UserCPassword", ErrorMessage = "Password Doesn't Match")]
         public string UserPassword { get; set; }
 
+        public string ProfilePicture { get; set; }
+
         [NotMapped]
         public string UserCPassword { get; set; }
+        [NotMapped]
+        public IFormFile ProfileImage { get; set; }
         public string UserType { get; set; }
     }
 }

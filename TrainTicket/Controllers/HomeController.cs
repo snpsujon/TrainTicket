@@ -14,15 +14,23 @@ namespace TrainTicket.Controllers
     public class HomeController : Controller
     {
         private readonly DataContext _context;
+        
         public HomeController(DataContext context)
         {
             _context = context;
         }
 
 
-        public IActionResult Index(DateTime SearchbyDate)
+            //if (HttpContext.Session.GetString("Email") == null)
+            //{
+            //    return RedirectToAction("Login", "Home");
+            //}   
+
+    public IActionResult Index(DateTime SearchbyDate)
         {
-            ViewBag.user = HttpContext.Session.GetString("UserName"); 
+            ViewBag.UserEmail = HttpContext.Session.GetString("Email"); 
+            ViewBag.UserType = HttpContext.Session.GetString("UserType"); 
+
 
             var TicInf = _context.ticketInformations.ToList();
             var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
@@ -58,22 +66,41 @@ namespace TrainTicket.Controllers
             return View();
         }
 
+        public JsonResult CheckUsernameAvailability(string userdata)
+        {
+            System.Threading.Thread.Sleep(200);
+            var SeachData = _context.userInformations.Where(x => x.UserEmail == userdata).SingleOrDefault();
+            if (SeachData != null)
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+
+        }
+
+
         [HttpPost]
         public IActionResult Create(UserInformation userInformations)
         {
-            var useremail = userInformations.UserEmail;
-            var dbem = _context.userInformations.FirstOrDefault(x => x.UserEmail == useremail).UserEmail;
-            if (useremail == dbem)
+            var usertype = "Buyer";
+            UserInformation users = new UserInformation
             {
+                UserFullName = userInformations.UserFullName,
+                UserPhoneNumber = userInformations.UserPhoneNumber,
+                UserEmail = userInformations.UserEmail,
+                UserPassword = userInformations.UserPassword,
+                UserType = usertype,
+            };
+            
+                _context.Add(users);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            }
-
-            _context.Add(userInformations);
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(Index));
-           
         }
+
+
 
 
 
@@ -89,9 +116,11 @@ namespace TrainTicket.Controllers
             ViewBag.pp = adm;
             if (adm != null)
             {
-                
+                HttpContext.Session.SetString("UserID", adm.UserID.ToString());
                 HttpContext.Session.SetString("UserName", adm.UserFullName.ToString());
-                return RedirectToAction("Index", "Home");
+                HttpContext.Session.SetString("Email", adm.UserEmail);
+                HttpContext.Session.SetString("UserType", adm.UserType);
+                return RedirectToAction("UserProfile", "User");
             }
             else
             {
@@ -103,7 +132,12 @@ namespace TrainTicket.Controllers
 
 
 
-
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            
+            return RedirectToAction(nameof(Index));
+        }
 
 
 

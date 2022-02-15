@@ -10,7 +10,7 @@ using TrainTicket.Data;
 namespace TrainTicket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220214080854_init")]
+    [Migration("20220215161307_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,6 +166,51 @@ namespace TrainTicket.Migrations
                     b.HasKey("TrainID");
 
                     b.ToTable("trains");
+                });
+
+            modelBuilder.Entity("TrainTicket.Models.UserInformation", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserFullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserID");
+
+                    b.ToTable("userInformations");
+                });
+
+            modelBuilder.Entity("TrainTicket.Models.UserType", b =>
+                {
+                    b.Property<int>("UserTypeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("UserTypeN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserTypeID");
+
+                    b.ToTable("userTypes");
                 });
 #pragma warning restore 612, 618
         }

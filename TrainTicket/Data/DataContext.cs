@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TrainTicket.Models;
+using Microsoft.EntityFrameworkCore.SqlServer;
+
 
 namespace TrainTicket.Data
 {

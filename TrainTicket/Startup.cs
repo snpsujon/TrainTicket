@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TrainTicket.Data;
+using Microsoft.AspNetCore.Session;
 
 namespace TrainTicket
 {
@@ -26,6 +27,8 @@ namespace TrainTicket
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession();
+            services.AddDistributedMemoryCache();
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -66,7 +69,7 @@ namespace TrainTicket
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Ticket}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Login}/{id?}");
             });
         }
     }
