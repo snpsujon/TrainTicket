@@ -59,12 +59,18 @@
                         <input type="tel" class="form-control" placeholder="Enter Phone Number" asp-for="UserPhoneNumber">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                <span class="fas fa-phone"></span>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" asp-for="UserPassword">
+                        <input type="password" class="form-control" placeholder="Password" asp-for="UserPassword" id="password-field" onkeyup='check();'>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                        </div>
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -72,7 +78,13 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password" asp-for="UserCPassword">
+                        <input type="password" class="form-control" placeholder="Retype password" asp-for="UserCPassword" id="Cpassword-field" onkeyup='check();'>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span toggle="#Cpassword-field" class="fa fa-fw fa-eye field-icon Ctoggle-password"></span>
+                            </div>
+                        </div>
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -82,6 +94,14 @@
 
 
                     <div class="row">
+                        <div class="col-12">
+                            <div class="icheck-primary">
+                                <p id="message"></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
                                 <input type="checkbox" id="agreeTerms" name="terms" value="agree">
@@ -90,9 +110,10 @@
                                 </label>
                             </div>
                         </div>
+
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <button type="submit" class="btn btn-primary btn-block" onclick="checkallbox()">Register</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -137,16 +158,64 @@
             },
         function (data) {
             if (data == 0) {
-                $("#status").html('<font color="Green">Available!</font>');
+                $("#status").html('Available!');
+                $("#status").css("color", "Green");
                 $("#uemail").css("border-color", "Green");
 
             }
             else {
-                $("#status").html('<font color="Red">This Email is already Used</font>');
+                $("#status").html('This Email is already Used');
+                $("#status").css("color", "Red");
                 $("#uemail").css("border-color", "Red");
             }
         });
-    }
+        }
+
+
+        $(".toggle-password").click(function () {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+        $(".Ctoggle-password").click(function () {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+
+
+        var check = function () {
+            if (document.getElementById('password-field').value ==
+                document.getElementById('Cpassword-field').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'matching';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'not matching';
+            }
+        }
+
+
+        function checkallbox() {
+            if (document.getElementById('message').innerHTML == 'not matching') {
+                alert("asjd");
+            }
+        }
+
+        
+
+
+
 
 
     </script>

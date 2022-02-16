@@ -73,17 +73,6 @@ namespace TrainTicket.Controllers
                 userinformation.UserPhoneNumber = model.UserPhoneNumber;
                 userinformation.UserPassword = model.UserPassword;
             }
-            
-            //{
-            //    UserID = userid,
-            //    UserFullName = userinformation.UserFullName,
-            //    UserEmail = userinformation.UserEmail,
-            //    UserPhoneNumber = userinformation.UserPhoneNumber,
-            //    UserPassword = userinformation.UserPassword,
-            //    UserType = userinformation.UserType,
-            //    ProfilePicture = uniqueFileName,
-            //};
-
             _context.Update(userinformation);
             _context.SaveChanges();
             return RedirectToAction("UserProfile");
