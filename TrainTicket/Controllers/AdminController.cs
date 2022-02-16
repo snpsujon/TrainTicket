@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,14 +20,24 @@ namespace TrainTicket.Controllers
 
         public IActionResult Users()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             var TotalUsers = _context.userInformations.Count();
             ViewBag.TotalUsers = TotalUsers;
             var allusers = _context.userInformations.ToList();
             return View(allusers);
         }
 
+
+        //Get Edit User by Admin
         public IActionResult EditUser(int id)
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             loadDDL();
             UserInformation user = _context.userInformations.Find(id);
             //var user = _context.userInformations.Where(x => x.UserID == id);

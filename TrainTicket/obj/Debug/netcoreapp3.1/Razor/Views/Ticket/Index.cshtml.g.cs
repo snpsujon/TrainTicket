@@ -26,8 +26,15 @@ using TrainTicket.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "D:\Project\MVC Project\TrainTicket\TrainTicket\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ecb445c18e71adf3fa8cf2f904cd786af2a70f50", @"/Views/Ticket/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"271eac61ac55137333fec69529824edd56d2d0eb", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1100fa8555ff53eedadef9f56d1e033a6472cb7d", @"/Views/_ViewImports.cshtml")]
     public class Views_Ticket_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<TrainTicket.Models.TicketInformation>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -77,7 +84,7 @@ using TrainTicket.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f506611", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f506798", async() => {
                 WriteLiteral(@"
     <meta charset=""utf-8"">
     <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
@@ -118,9 +125,9 @@ using TrainTicket.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f508431", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f508618", async() => {
                 WriteLiteral("\r\n    <div class=\"wrapper\">\r\n\r\n\r\n\r\n\r\n        <div class=\"card\">\r\n            <div class=\"card-header\">\r\n                <h3 class=\"card-title\">Available Tickets</h3><br />\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f508900", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f509087", async() => {
                     WriteLiteral("Create New");
                 }
                 );
@@ -171,7 +178,7 @@ using TrainTicket.Models;
                     <table>
                         <tr>
                             ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f5011726", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f5011913", async() => {
                     WriteLiteral("\r\n\r\n                            <td><label for=\"date\">Search By Date:</label></td>\r\n                            <td> <input type=\"text\" name=\"SearchbyDate\"");
                     BeginWriteAttribute("value", " value=\"", 2501, "\"", 2509, 0);
                     EndWriteAttribute();
@@ -300,7 +307,7 @@ using TrainTicket.Models;
 #line hidden
 #nullable disable
                 WriteLiteral("</td>\r\n\r\n                                    <td>\r\n                                        ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f5017911", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecb445c18e71adf3fa8cf2f904cd786af2a70f5018098", async() => {
                     WriteLiteral("Booking Ticket");
                 }
                 );

@@ -19,7 +19,7 @@ namespace TrainTicket.ViewModels
 
         [Compare("UserCPassword", ErrorMessage = "Password Doesn't Match")]
         public string UserPassword { get; set; }
-
+        public bool Deletepro { get; set; }
         public IFormFile ProfileImage { get; set; }
 
         [NotMapped]

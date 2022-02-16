@@ -10,7 +10,7 @@ using TrainTicket.Data;
 namespace TrainTicket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220215161307_init")]
+    [Migration("20220216161035_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

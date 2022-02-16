@@ -329,3 +329,11 @@ D:\Project\MVC Project\TrainTicket\TrainTicket\bin\Debug\netcoreapp3.1\tr\Micros
 D:\Project\MVC Project\TrainTicket\TrainTicket\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Project\MVC Project\TrainTicket\TrainTicket\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\User\ProfilePicture.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditUser.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Users.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Users1.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_MyLayout.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\User\Index.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\User\ProfilePicture.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\User\UserProfile.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Home\NotFound.cshtml.g.cs

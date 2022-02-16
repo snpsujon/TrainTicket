@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,21 @@ namespace TrainTicket.Controllers
         }
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+            var totaltrain = _context.trains.Count();
+            ViewBag.totaltrain = totaltrain;
             var trains = _context.trains.ToList();
             return View(trains);
         }
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             return View();
         }
         [HttpPost]

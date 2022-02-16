@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,10 @@ namespace TrainTicket.Controllers
         }
         public IActionResult Index(DateTime SearchbyDate)
         {
-            
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             var TicInf = _context.ticketInformations.ToList();
             var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
             ViewBag.TotalTicket = TotalTicket;
@@ -54,6 +58,10 @@ namespace TrainTicket.Controllers
 
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             loadDDL();
 
             return View();

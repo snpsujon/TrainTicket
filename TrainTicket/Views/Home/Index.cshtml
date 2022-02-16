@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<TrainTicket.Models.TicketInformation>
-@*@{
-        ViewData["Title"] = "Index";
-    }*@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+    }
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,16 +44,7 @@
             <div class="card-header">
                 <h3 class="card-title">Available Tickets</h3><br />
 
-                @{
-                    if (ViewBag.UserType == "Admin")
-                    {
-                        <a asp-controller="Ticket" asp-action="Create" class="btn btn-success">Create New</a>
-                    }
-                    else
-                    {
-                        <span id="not" class="info-box-number text-center mb-0">@ViewBag.user</span>
-                    }
-                }
+               
 
                 <div class="col-12 col-sm-4 float-right">
                     <div class="info-box bg-light">
