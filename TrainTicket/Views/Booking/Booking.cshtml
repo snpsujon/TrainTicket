@@ -1,0 +1,238 @@
+﻿@model TrainTicket.ViewModels.BookingVM
+
+@{
+    ViewData["Title"] = "Booking";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Project Add</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper container">
+        <form asp-action="Create">
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Your Informations</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <input type="text" class="form-control" placeholder=".col-3" readonly asp-for="BuyerName">
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" placeholder=".col-4" readonly asp-for="BuyerPhone">
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" class="form-control" placeholder=".col-5" readonly asp-for="BuyerEmail">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Seller Informations</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <input type="text" class="form-control" placeholder=".col-3" readonly asp-for="SellerName">
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" placeholder=".col-4" readonly asp-for="SellerPhone">
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" class="form-control" placeholder=".col-5" readonly asp-for="SellerEmail">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Ticket Information of @Model.TrainName</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="inputStatus">From Station</label>
+                                    <input type="text" class="form-control" placeholder=".col-3" readonly asp-for="FromStation">
+                                </div>
+                                <div class="col-4">
+                                    <label for="inputStatus">To Station</label>
+                                    <input type="text" class="form-control" placeholder=".col-4" readonly asp-for="ToStation">
+                                </div>
+                                <div class="col-5">
+                                    <label for="inputStatus">Journey Date</label>
+                                    <input type="text" class="form-control" placeholder=".col-5" readonly asp-for="JourneyTime">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="inputStatus">Class</label>
+                                    <input type="text" class="form-control" placeholder=".col-3" readonly asp-for="SitClass">
+                                </div>
+                                <div class="col-4">
+                                    <label for="inputStatus">Per Ticket Price</label>
+                                    <input type="text" class="form-control" placeholder=".col-4" readonly asp-for="PerTicketPrice" id="PerTicketPrice">
+                                </div>
+                                <div class="col-5">
+                                    <label for="TotalSit">Total Avl Tickets</label>
+                                    <input type="text" class="form-control" placeholder=".col-5" readonly asp-for="TotalSit" id="TotalSit">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Please Input Your Ticket Information</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputDescription">Booking Time</label>
+                                <input id="inputDescription" type="datetime" class="form-control" rows="4" asp-for="BookedTime" value="@DateTime.Now.ToString("dddd, dd MMMM yyyy hh:mm tt")" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="TicketQuantity">Quantity</label>
+                                <input type="number" id="TicketQuantity" class="form-control" rows="4" asp-for="TicketQuantity" onkeyup="myFunction()">
+                            </div>
+                            <div class="form-group">
+                                <label for="TicketTotalPrice">Total Price</label>
+                                <input type="number" id="TicketTotalPrice" class="form-control" rows="4" asp-for="TicketTotalPrice" readonly>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <label for="inputStatus">Payment Type</label>
+                                <select id="fStation" class="form-control custom-select ab">
+                                    <option selected disabled>Select one</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputStatus">Payment Confirmations</label>
+                                <input type="text" id="inputDescription" class="form-control" rows="4" asp-for="PaymentConfirmation">
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+
+
+
+
+
+
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Create new Project" class="btn btn-success float-right">
+                </div>
+            </div>
+
+
+
+
+
+            </form>
+        </div>
+
+    <script>
+
+        
+            function myFunction() {
+                var a = document.getElementById('PerTicketPrice').value;
+                var b = document.getElementById('TicketQuantity').value;
+                var c = document.getElementById('TotalSit').value;
+                var t = parseInt(c) - parseInt(b);
+                var s = parseInt(a) * parseInt(b);
+                document.getElementById('TotalSit').value = t;
+                document.getElementById('TicketTotalPrice').value = s;
+
+
+            }
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -2,7 +2,10 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = null;
+    
+   
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+   
 }
 
 
@@ -14,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Registration Page (v2)</title>
 
-    
+
 
 
     <!-- Google Font: Source Sans Pro -->
@@ -28,14 +31,14 @@
     <link rel="stylesheet" href="~/Assets/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition register-page">
-    <div class="register-box">
+    <div class="register-box container">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+                <a href="#" class="h1"><b>Train</b>Tickets</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Register a new membership</p>
-                
+
 
                 <form asp-action="Create" method="post">
                     <div class="input-group mb-3">
@@ -97,11 +100,11 @@
                         <div class="col-12">
                             <div class="icheck-primary">
                                 <p id="message"></p>
-                                
+
                             </div>
                         </div>
                     </div>
-                        <div class="row">
+                    <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
                                 <input type="checkbox" id="agreeTerms" name="terms" value="agree">
@@ -119,26 +122,23 @@
                     </div>
                 </form>
 
-                <div class="social-auth-links text-center">
-                    <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i>
-                        Sign up using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i>
-                        Sign up using Google+
-                    </a>
-                </div>
+                @*<div class="social-auth-links text-center">
+                        <a href="#" class="btn btn-block btn-primary">
+                            <i class="fab fa-facebook mr-2"></i>
+                            Sign up using Facebook
+                        </a>
+                        <a href="#" class="btn btn-block btn-danger">
+                            <i class="fab fa-google-plus mr-2"></i>
+                            Sign up using Google+
+                        </a>
+                    </div>*@
 
-                <a href="login.html" class="text-center">I already have a membership</a>
+                <a asp-action="Login" class="text-center">I already have a membership</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
     </div>
     <!-- /.register-box -->
-   
-
-
     <!-- jQuery -->
     <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -212,7 +212,7 @@
             }
         }
 
-        
+
 
 
 
@@ -256,55 +256,55 @@
 
 @*<h1>Create</h1>
 
-<h4>UserInformation</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserFullName" class="control-label"></label>
-                <input asp-for="UserFullName" class="form-control" />
-                <span asp-validation-for="UserFullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserPhoneNumber" class="control-label"></label>
-                <input asp-for="UserPhoneNumber" class="form-control" />
-                <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserEmail" class="control-label"></label>
-                <input asp-for="UserEmail" class="form-control" />
-                <span asp-validation-for="UserEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserPassword" class="control-label"></label>
-                <input asp-for="UserPassword" class="form-control" />
-                <span asp-validation-for="UserPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserCPassword" class="control-label"></label>
-                <input asp-for="UserCPassword" class="form-control" />
-                <span asp-validation-for="UserCPassword" class="text-danger"></span>
-            </div>
+    <h4>UserInformation</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserFullName" class="control-label"></label>
+                    <input asp-for="UserFullName" class="form-control" />
+                    <span asp-validation-for="UserFullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserPhoneNumber" class="control-label"></label>
+                    <input asp-for="UserPhoneNumber" class="form-control" />
+                    <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserEmail" class="control-label"></label>
+                    <input asp-for="UserEmail" class="form-control" />
+                    <span asp-validation-for="UserEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserPassword" class="control-label"></label>
+                    <input asp-for="UserPassword" class="form-control" />
+                    <span asp-validation-for="UserPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserCPassword" class="control-label"></label>
+                    <input asp-for="UserCPassword" class="form-control" />
+                    <span asp-validation-for="UserCPassword" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="UserType" class="control-label"></label>
-                <select id="trainName" class="form-control custom-select ab" asp-for="UserType" asp-items="@(new SelectList(ViewBag.StationName, "UserTypeN","UserTypeN"))" required>
-                    <option selected disabled>Select one</option>
-                </select>
-                <span asp-validation-for="UserType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="UserType" class="control-label"></label>
+                    <select id="trainName" class="form-control custom-select ab" asp-for="UserType" asp-items="@(new SelectList(ViewBag.StationName, "UserTypeN","UserTypeN"))" required>
+                        <option selected disabled>Select one</option>
+                    </select>
+                    <span asp-validation-for="UserType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

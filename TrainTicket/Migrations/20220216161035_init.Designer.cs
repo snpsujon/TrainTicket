@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainTicket.Data;
 
 namespace TrainTicket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220216161035_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,15 +41,6 @@ namespace TrainTicket.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SellerID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TicketID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TicketQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TicketTotalPrice")
                         .HasColumnType("int");
 
                     b.HasKey("BookingID");

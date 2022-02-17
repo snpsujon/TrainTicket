@@ -2,34 +2,92 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Stations)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stations)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.StationID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.StationID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.StationID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | DataTables</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Stations Informations</h3><br />
+                <a asp-controller="Stations" asp-action="Create" class="btn btn-success">Add Station</a>
+                <div class="col-12 col-sm-4 float-right">
+                    <div class="info-box bg-light">
+                        <div class="info-box-content">
+                            <span class="info-box-text text-center text-muted">Total Station</span>
+
+                            <span id="not" class="info-box-number text-center mb-0">@ViewBag.totalStation</span>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="example1" class="dataTables_wrapper dt-bootstrap4">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search By Station name.." title="Type in a Station name" class="float-right">
+                    <table id="example1_wrapper" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Station Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                    @Html.DisplayFor(modelItem => item.Stations)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.StationID" class="btn btn-secondary">Edit Station Name</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("example1_wrapper");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

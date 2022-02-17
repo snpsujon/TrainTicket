@@ -62,6 +62,10 @@ namespace TrainTicket.Controllers
         }
         public IActionResult Create()
         {
+            //if (HttpContext.Session.GetString("Email") == null)
+            //{
+            //    return RedirectToAction("Login", "Home");
+            //}
             loadDDL();
             return View();
         }
@@ -120,6 +124,12 @@ namespace TrainTicket.Controllers
                 HttpContext.Session.SetString("UserName", adm.UserFullName.ToString());
                 HttpContext.Session.SetString("Email", adm.UserEmail);
                 HttpContext.Session.SetString("UserType", adm.UserType);
+                if(adm.ProfilePicture != null)
+                {
+                    HttpContext.Session.SetString("UserPro", adm.ProfilePicture);
+                }
+                
+
                 return RedirectToAction("UserProfile", "User");
             }
             else
@@ -137,6 +147,13 @@ namespace TrainTicket.Controllers
             HttpContext.Session.Clear();
             
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult NotFound()
+        {
+            
+
+            return View();
         }
 
 
@@ -164,28 +181,5 @@ namespace TrainTicket.Controllers
 
 
 
-
-        //private readonly ILogger<HomeController> _logger;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
     }
 }

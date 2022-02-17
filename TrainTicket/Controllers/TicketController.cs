@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,10 @@ namespace TrainTicket.Controllers
         }
         public IActionResult Index(DateTime SearchbyDate)
         {
-            
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             var TicInf = _context.ticketInformations.ToList();
             var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
             ViewBag.TotalTicket = TotalTicket;
@@ -54,6 +58,10 @@ namespace TrainTicket.Controllers
 
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             loadDDL();
 
             return View();
@@ -61,7 +69,19 @@ namespace TrainTicket.Controllers
         [HttpPost]
         public IActionResult Create(TicketInformation ticketInformations)
         {
-            _context.Add(ticketInformations);
+            var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+            TicketInformation ticket = new TicketInformation
+            {
+                TrainName = ticketInformations.TrainName,
+                JourneyTime = ticketInformations.JourneyTime,
+                PerTicketPrice = ticketInformations.PerTicketPrice,
+                TotalSit = ticketInformations.TotalSit,
+                FStarionName = ticketInformations.FStarionName,
+                TStationName = ticketInformations.TStationName,
+                SitClass = ticketInformations.SitClass,
+                SellerID = userid,
+            };
+            _context.Add(ticket);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));

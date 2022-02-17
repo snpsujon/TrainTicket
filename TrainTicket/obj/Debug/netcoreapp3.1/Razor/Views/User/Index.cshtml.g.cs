@@ -26,8 +26,15 @@ using TrainTicket.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "H:\Sujon\TrainTicket\TrainTicket\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dfad16c54b18c295d3f78d43f5f5c23b906fd772", @"/Views/User/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"271eac61ac55137333fec69529824edd56d2d0eb", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1100fa8555ff53eedadef9f56d1e033a6472cb7d", @"/Views/_ViewImports.cshtml")]
     public class Views_User_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

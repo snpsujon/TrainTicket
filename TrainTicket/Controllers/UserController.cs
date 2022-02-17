@@ -25,6 +25,10 @@ namespace TrainTicket.Controllers
         }
         public IActionResult UserProfile()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
             UserInformation userinformation = _context.userInformations.Where(x => x.UserID == userid).FirstOrDefault();
 
@@ -33,6 +37,10 @@ namespace TrainTicket.Controllers
 
         public IActionResult ProfilePicture()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             int userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
             UserInformation user =_context.userInformations.Find(userid);
             UserInformationsVM uservm = new UserInformationsVM
@@ -54,27 +62,77 @@ namespace TrainTicket.Controllers
             var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
             UserInformation userinformation = _context.userInformations.Where(x => x.UserID == userid).FirstOrDefault();
 
-
-            
-            if(model.ProfileImage != null)
+            if (userinformation.ProfilePicture != null)
             {
-                userinformation.ProfilePicture = uniqueFileName;
-                userinformation.UserFullName = model.UserFullName;
-                userinformation.UserEmail = model.UserEmail;
-                userinformation.UserPhoneNumber = model.UserPhoneNumber;
-                userinformation.UserPassword = model.UserPassword;
+                //for delete picture from database file path search
+                var propic = userinformation.ProfilePicture;
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                var filepath = Path.Combine(path, propic);
+                FileInfo picture = new FileInfo(filepath);
+                if (model.Deletepro == true)
+                {
+                    picture.Delete();        //If you want to delete picture from upload folder
+                    userinformation.ProfilePicture = null;
+                    userinformation.UserFullName = model.UserFullName;
+                    userinformation.UserEmail = model.UserEmail;
+                    userinformation.UserPhoneNumber = model.UserPhoneNumber;
+                    userinformation.UserPassword = model.UserPassword;
+                }
+                else
+                {
+                    if (model.ProfileImage != null)
+                    {
+                        picture.Delete();
+                        userinformation.ProfilePicture = uniqueFileName;
+                        userinformation.UserFullName = model.UserFullName;
+                        userinformation.UserEmail = model.UserEmail;
+                        userinformation.UserPhoneNumber = model.UserPhoneNumber;
+                        userinformation.UserPassword = model.UserPassword;
 
+                    }
+                    else
+                    {
+
+                        userinformation.UserFullName = model.UserFullName;
+                        userinformation.UserEmail = model.UserEmail;
+                        userinformation.UserPhoneNumber = model.UserPhoneNumber;
+                        userinformation.UserPassword = model.UserPassword;
+                    }
+
+
+                }
+               
             }
             else
             {
-                
-                userinformation.UserFullName = model.UserFullName;
-                userinformation.UserEmail = model.UserEmail;
-                userinformation.UserPhoneNumber = model.UserPhoneNumber;
-                userinformation.UserPassword = model.UserPassword;
+                if (model.ProfileImage != null)
+                {
+                    
+                    userinformation.ProfilePicture = uniqueFileName;
+                    userinformation.UserFullName = model.UserFullName;
+                    userinformation.UserEmail = model.UserEmail;
+                    userinformation.UserPhoneNumber = model.UserPhoneNumber;
+                    userinformation.UserPassword = model.UserPassword;
+
+                }
+                else
+                {
+
+                    userinformation.UserFullName = model.UserFullName;
+                    userinformation.UserEmail = model.UserEmail;
+                    userinformation.UserPhoneNumber = model.UserPhoneNumber;
+                    userinformation.UserPassword = model.UserPassword;
+                }
+
+
             }
+
+            
+            
             _context.Update(userinformation);
             _context.SaveChanges();
+
+            //HttpContext.Session.SetString("UserPro", uniqueFileName);
             return RedirectToAction("UserProfile");
             
         }
@@ -84,6 +142,10 @@ namespace TrainTicket.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
             ViewBag.UserID = HttpContext.Session.GetString("UserID");
             return View();
         }

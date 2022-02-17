@@ -336,3 +336,6 @@ H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_MyL
 H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\User\Index.cshtml.g.cs
 H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\User\ProfilePicture.cshtml.g.cs
 H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\User\UserProfile.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Home\NotFound.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Home\NotFound.cshtml.g.cs
+H:\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Booking\Booking.cshtml.g.cs

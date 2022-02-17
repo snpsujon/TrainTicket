@@ -10,8 +10,8 @@ using TrainTicket.Data;
 namespace TrainTicket.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220216064848_init")]
-    partial class init
+    [Migration("20220217062643_office")]
+    partial class office
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,15 @@ namespace TrainTicket.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SellerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketTotalPrice")
                         .HasColumnType("int");
 
                     b.HasKey("BookingID");
