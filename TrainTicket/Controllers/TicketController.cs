@@ -24,33 +24,40 @@ namespace TrainTicket.Controllers
             if (HttpContext.Session.GetString("Email") == null)
             {
                 return RedirectToAction("NotFound", "Home");
-            }
-            var TicInf = _context.ticketInformations.ToList();
-            var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
-            ViewBag.TotalTicket = TotalTicket;
-            var msg = "Total Avl Ticket";
-            ViewBag.msg = msg;
-            var date = SearchbyDate;
-            
-            if (date.ToString() != "1/1/0001 12:00:00 AM")
-            {
-                var searchdate = _context.ticketInformations.Where(x => x.JourneyTime > date || x.JourneyTime == date).ToList();
-                if (searchdate.Count != 0)
-                {
-                    var dates = SearchbyDate.ToString("dd MMMM yyyy");
-                    ViewBag.msg = "Total Avl Tickets On " + dates;
-                    TotalTicket = searchdate.Sum(p => p.TotalSit);
-                    ViewBag.TotalTicket = TotalTicket;
-                    return View(searchdate);
-                }
-                else
-                {
-                    ViewBag.TotalTicket = "No Avl Ticket";
-                    return View(TicInf);
-                }
+                
             }
 
-            return View(TicInf);
+            if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Seller")
+            {
+                var TicInf = _context.ticketInformations.ToList();
+                var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
+                ViewBag.TotalTicket = TotalTicket;
+                var msg = "Total Avl Ticket";
+                ViewBag.msg = msg;
+                var date = SearchbyDate;
+            
+                if (date.ToString() != "1/1/0001 12:00:00 AM")
+                {
+                    var searchdate = _context.ticketInformations.Where(x => x.JourneyTime > date || x.JourneyTime == date).ToList();
+                    if (searchdate.Count != 0)
+                    {
+                        var dates = SearchbyDate.ToString("dd MMMM yyyy");
+                        ViewBag.msg = "Total Avl Tickets On " + dates;
+                        TotalTicket = searchdate.Sum(p => p.TotalSit);
+                        ViewBag.TotalTicket = TotalTicket;
+                        return View(searchdate);
+                    }
+                    else
+                    {
+                        ViewBag.TotalTicket = "No Avl Ticket";
+                        return View(TicInf);
+                    }
+                }
+
+                return View(TicInf);
+            }
+            return RedirectToAction("NotFound", "Home");
+            
 
 
 
@@ -58,13 +65,18 @@ namespace TrainTicket.Controllers
 
         public IActionResult Create()
         {
+
             if (HttpContext.Session.GetString("Email") == null)
             {
                 return RedirectToAction("NotFound", "Home");
             }
-            loadDDL();
+            if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Seller")
+            {
+                loadDDL();
 
-            return View();
+                return View();
+            }
+            return RedirectToAction("NotFound", "Home");
         }
         [HttpPost]
         public IActionResult Create(TicketInformation ticketInformations)

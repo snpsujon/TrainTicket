@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\TrainTicket</_PublishTargetUrl>
+    <History>True|2022-02-17T21:15:36.3738835Z;True|2022-02-18T02:55:33.9299859+06:00;True|2022-02-18T02:53:35.7067914+06:00;True|2022-02-17T20:52:57.0500696+06:00;</History>
+  </PropertyGroup>
+</Project>

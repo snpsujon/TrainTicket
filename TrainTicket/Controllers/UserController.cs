@@ -27,10 +27,34 @@ namespace TrainTicket.Controllers
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
-                return RedirectToAction("NotFound", "Home");
+                return RedirectToAction("Login", "Home");
             }
             var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
             UserInformation userinformation = _context.userInformations.Where(x => x.UserID == userid).FirstOrDefault();
+
+            //For DashBoard Graph
+            var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
+            var sellinformation = _context.bookingInformations.Where(x => x.SellerID == userid).ToList();
+            var totalsell = sellinformation.Sum(p => p.TicketQuantity);
+            var buyinformation = _context.bookingInformations.Where(x => x.BuyerID == userid).ToList();
+            var toalbuy = buyinformation.Sum(p => p.TicketQuantity);
+            if(TotalTicket != 0)
+            {
+                int sellgrph = Convert.ToInt32((Convert.ToDecimal(totalsell)/Convert.ToDecimal(TotalTicket))*100);
+                ViewBag.sellgrph = sellgrph;
+            }
+            
+            if(TotalTicket != 0)
+            {
+                int buygrph = Convert.ToInt32((Convert.ToDecimal(toalbuy) / Convert.ToDecimal(TotalTicket)) * 100);
+                ViewBag.buygrph = buygrph;
+            }
+            
+
+            
+            
+            //End DashBoard Graph
+
 
             return View(userinformation);
         }

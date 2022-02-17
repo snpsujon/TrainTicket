@@ -12,5 +12,6 @@
     <WebStackScaffolding_DbContextTypeFullName>TrainTicket.Data.DataContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_MyLayout.cshtml</WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_ControllerDialogWidth>650</WebStackScaffolding_ControllerDialogWidth>
+    <NameOfLastUsedPublishProfile>F:\New folder\Sujon\TrainTicket\TrainTicket\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

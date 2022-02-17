@@ -23,7 +23,7 @@ namespace TrainTicket.Controllers
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
-                return RedirectToAction("NotFound", "Home");
+                return RedirectToAction("Login", "Home");
             }
             loadDDL();
             var ticket = _context.ticketInformations.Find(id);
@@ -63,6 +63,37 @@ namespace TrainTicket.Controllers
 
             return View(booking);
             //return View();
+        }
+
+        [HttpPost]
+        public IActionResult Booking(BookingVM booking)
+        {
+            
+            UserInformation buyer = _context.userInformations.Find(booking.BuyerID);
+            UserInformation seller = _context.userInformations.Find(booking.SellerID);
+            TicketInformation ticket = _context.ticketInformations.Find(booking.TicketID);
+
+            ticket.TotalSit = booking.TotalSit;
+
+            BookingInformation booked = new BookingInformation
+            {
+                BuyerID = booking.BuyerID,
+                SellerID = booking.SellerID,
+                TicketID = booking.TicketID,
+                TicketQuantity = booking.TicketQuantity,
+                TicketTotalPrice = booking.TicketTotalPrice,
+                BookedTime = booking.BookedTime,
+                PaymentType = booking.PaymentType,
+                PaymentConfirmation = booking.PaymentConfirmation,
+            };
+
+            _context.Update(ticket);
+            _context.Add(booked);
+            _context.SaveChanges();
+
+
+
+            return RedirectToAction("Index", "Home");
         }
 
 

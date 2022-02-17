@@ -101,7 +101,7 @@ namespace TrainTicket.Controllers
             
                 _context.Add(users);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Login));
         }
 
 
@@ -130,7 +130,7 @@ namespace TrainTicket.Controllers
                 }
                 
 
-                return RedirectToAction("UserProfile", "User");
+                return RedirectToAction("Index", "Home");
             }
             else
             {

@@ -14,7 +14,31 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  
+
+    <link rel="stylesheet" href="~/Assets/plugins/fontawesome-free/css/all.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="~/Assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="~/Assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="~/Assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/Assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/Assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/Assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="~/Assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+    <!-- BS Stepper -->
+    <link rel="stylesheet" href="~/Assets/plugins/bs-stepper/css/bs-stepper.min.css">
+    <!-- dropzonejs -->
+    <link rel="stylesheet" href="~/Assets/plugins/dropzone/min/dropzone.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Assets/dist/css/adminlte.min.css">
+
+
+
+
 </head>
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -44,7 +68,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputStatus">Train Name</label>
-                                    <select id="trainName" class="form-control custom-select ab" asp-for="TrainName" asp-items="@(new SelectList(ViewBag.TrainName, "TrainName","TrainName"))" required>
+                                    <select id="trainName" class="form-control select2bs4 ab" asp-for="TrainName" asp-items="@(new SelectList(ViewBag.TrainName, "TrainName","TrainName"))" required style="width: 100%;">
                                         <option selected disabled>Select one</option>
                                     </select>
                                 </div>
@@ -54,13 +78,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputStatus">From Station</label>
-                                    <select id="fStation" class="form-control custom-select ab" asp-for="FStarionName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))" required>
+                                    <select id="fStation" class="form-control select2bs4 ab" asp-for="FStarionName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))" required style="width: 100%;">
                                         <option selected disabled>Select one</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputStatus">To Station</label>
-                                    <select id="tStation" class="form-control custom-select ab" asp-for="TStationName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))" required>
+                                    <select id="tStation" class="form-control select2bs4 ab" asp-for="TStationName" asp-items="@(new SelectList(ViewBag.StationName, "Stations","Stations"))" required style="width: 100%;">
                                         <option selected disabled>Select one</option>
                                     </select>
                                 </div>
@@ -74,10 +98,10 @@
 
                                 <div class="form-group">
                                     <label for="inputClientCompany">Class</label>
-                                    <select id="sit" class="form-control custom-select ab" asp-for="SitClass" required>
+                                    <select id="sit" class="form-control select2bs4 ab" asp-for="SitClass" required style="width: 100%;">
                                         <option selected disabled>Select one</option>
                                         <option>Shovon</option>
-                                        <option>Chaiar</option>
+                                        <option>Chair</option>
                                     </select>
                                 </div>
 
@@ -106,25 +130,48 @@
     </div>
     <!-- /.content -->
     <!-- ./wrapper -->
-  
+
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
+    <script src="~/Assets/plugins/select2/js/select2.full.min.js"></script>
 
-        
+    @section Scripts {
+        <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="~/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Select2 -->
+        <script src="~/Assets/plugins/select2/js/select2.full.min.js"></script>
+        <!-- Bootstrap4 Duallistbox -->
+        <script src="~/Assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+        <!-- InputMask -->
+        <script src="~/Assets/plugins/moment/moment.min.js"></script>
+        <script src="~/Assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+        <!-- date-range-picker -->
+        <script src="~/Assets/plugins/daterangepicker/daterangepicker.js"></script>
+        <!-- bootstrap color picker -->
+        <script src="~/Assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="~/Assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <!-- Bootstrap Switch -->
+        <script src="~/Assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+        <!-- BS-Stepper -->
+        <script src="~/Assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+        <!-- dropzonejs -->
+        <script src="~/Assets/plugins/dropzone/min/dropzone.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/Assets/dist/js/adminlte.min.js"></script>
+    
+        <script>
+            $(function () {
+                //Initialize Select2 Elements
+                $('.select2bs4').select2()
+            })
 
 
+        </script>
 
-
-
-
-
-
-
-
-
-
-    </script>
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 
 
 
@@ -138,96 +185,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<h1>Create</h1>
-
-<h4>TicketInformation</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TrainName" class="control-label"></label>
-                <input asp-for="TrainName" class="form-control" />
-                <span asp-validation-for="TrainName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JourneyTime" class="control-label"></label>
-                <input asp-for="JourneyTime" class="form-control" />
-                <span asp-validation-for="JourneyTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalSit" class="control-label"></label>
-                <input asp-for="TotalSit" class="form-control" />
-                <span asp-validation-for="TotalSit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SitClass" class="control-label"></label>
-                <input asp-for="SitClass" class="form-control" />
-                <span asp-validation-for="SitClass" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StationID" class="control-label"></label>
-                <select asp-for="StationID" class="form-control" asp-items="@(new SelectList(ViewBag.StationName, "StationID","Stations"))"></select>-->
-                @*<span asp-validation-for="StationID" class="text-danger"></span>*@
-            <!--</div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>-->
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

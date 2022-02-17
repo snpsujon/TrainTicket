@@ -23,19 +23,29 @@ namespace TrainTicket.Controllers
             if (HttpContext.Session.GetString("Email") == null)
             {
                 return RedirectToAction("NotFound", "Home");
+                
             }
-            var totaltrain = _context.trains.Count();
-            ViewBag.totaltrain = totaltrain;
-            var trains = _context.trains.ToList();
-            return View(trains);
+            if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Seller")
+            {
+                var totaltrain = _context.trains.Count();
+                ViewBag.totaltrain = totaltrain;
+                var trains = _context.trains.ToList();
+                return View(trains);
+            }
+            return RedirectToAction("NotFound", "Home");
         }
         public IActionResult Create()
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
                 return RedirectToAction("NotFound", "Home");
+                
             }
-            return View();
+            if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Seller")
+            {
+                return View();
+            }
+            return RedirectToAction("NotFound", "Home");
         }
         [HttpPost]
         public IActionResult Create(Train trains)

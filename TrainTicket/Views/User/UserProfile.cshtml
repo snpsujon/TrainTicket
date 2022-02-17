@@ -7,44 +7,175 @@
 
 
 
-<div class="card card-primary card-outline">
-    <div class="card-body box-profile">
-        <div class="text-center">
-            @if (Model.ProfilePicture == null)
-            {
-                <img class="profile-user-img img-fluid img-circle"
-                     src="~/images/user.png"
-                     alt="User profile picture">
-            }
-            else
-            {
-        <img class="profile-user-img img-fluid img-circle"
-             src="~/images/@Model.ProfilePicture"
-             alt="User profile picture">
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Project Add</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper container">
+        <section class="content">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card card-primary card-outline">
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                @if (Model.ProfilePicture == null)
+                                {
+                                    <img class="profile-user-img img-fluid img-circle" src="~/images/user.png" alt="User profile picture"> 
+                                }
+                                else
+                                {
+                                    <img class="profile-user-img img-fluid img-circle" src="~/images/@Model.ProfilePicture" alt="User profile picture">
+                                }
+
+                            </div>
+
+                            <h3 class="profile-username text-center">@Model.UserFullName</h3>
+
+                            <p class="text-muted text-center">@Model.UserType</p>
+
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Email</b> <a class="float-right">@Model.UserEmail</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Phone Number</b> <a class="float-right">@Model.UserPhoneNumber</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Total Buy Tickets</b> <a class="float-right">13,287</a>
+                                </li>
+                            </ul>
+
+                            <a asp-action="ProfilePicture" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+                        </div>
+                    </div>
+                </div>
             
-        </div>
 
-        <h3 class="profile-username text-center">@Model.UserFullName</h3>
+            
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="far fa-chart-bar"></i>
+                                Your Info
+                            </h3>
 
-        <p class="text-muted text-center">@Model.UserType</p>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-6 text-center">
+                                    <input type="text" class="knob" value="@ViewBag.sellgrph" data-width="90" data-height="90" data-fgColor="#932ab6" readonly>
+                                    <div class="knob-label">Total Sell</div>
+                                </div>
+                                <div class="col-12 col-md-6 text-center">
+                                    <input type="text" class="knob" value="@ViewBag.buygrph" data-width="90" data-height="90" data-fgColor="#f56954" readonly>
 
-        <ul class="list-group list-group-unbordered mb-3">
-            <li class="list-group-item">
-                <b>Email</b> <a class="float-right">@Model.UserEmail</a>
-            </li>
-            <li class="list-group-item">
-                <b>Phone Number</b> <a class="float-right">@Model.UserPhoneNumber</a>
-            </li>
-            <li class="list-group-item">
-                <b>Total Buy Tickets</b> <a class="float-right">13,287</a>
-            </li>
-        </ul>
-        
-        <a asp-action="ProfilePicture" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+                                    <div class="knob-label">Total buy</div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+          </div>
+        </section>
     </div>
-    <!-- /.card-body -->
-</div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</body>
+</html>
 
 
+@section Scripts {
+    <script>
+        $(function () {
+            /* jQueryKnob */
 
+            $('.knob').knob({
+                /*change : function (value) {
+                 //console.log("change : " + value);
+                 },
+                 release : function (value) {
+                 console.log("release : " + value);
+                 },
+                 cancel : function () {
+                 console.log("cancel : " + this.value);
+                 },*/
+                draw: function () {
+
+                    // "tron" case
+                    if (this.$.data('skin') == 'tron') {
+
+                        var a = this.angle(this.cv)  // Angle
+                            ,
+                            sa = this.startAngle          // Previous start angle
+                            ,
+                            sat = this.startAngle         // Start angle
+                            ,
+                            ea                            // Previous end angle
+                            ,
+                            eat = sat + a                 // End angle
+                            ,
+                            r = true
+
+                        this.g.lineWidth = this.lineWidth
+
+                        this.o.cursor
+                            && (sat = eat - 0.3)
+                            && (eat = eat + 0.3)
+
+                        if (this.o.displayPrevious) {
+                            ea = this.startAngle + this.angle(this.value)
+                            this.o.cursor
+                                && (sa = ea - 0.3)
+                                && (ea = ea + 0.3)
+                            this.g.beginPath()
+                            this.g.strokeStyle = this.previousColor
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false)
+                            this.g.stroke()
+                        }
+
+                        this.g.beginPath()
+                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false)
+                        this.g.stroke()
+
+                        this.g.lineWidth = 2
+                        this.g.beginPath()
+                        this.g.strokeStyle = this.o.fgColor
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false)
+                        this.g.stroke()
+
+                        return false
+                    }
+                }
+            })
+            /* END JQUERY KNOB */
+
+            //INITIALIZE SPARKLINE CHARTS
+            var sparkline1 = new Sparkline($('#sparkline-1')[0], { width: 240, height: 70, lineColor: '#92c1dc', endColor: '#92c1dc' })
+            var sparkline2 = new Sparkline($('#sparkline-2')[0], { width: 240, height: 70, lineColor: '#f56954', endColor: '#f56954' })
+            var sparkline3 = new Sparkline($('#sparkline-3')[0], { width: 240, height: 70, lineColor: '#3af221', endColor: '#3af221' })
+
+            sparkline1.draw([1000, 1200, 920, 927, 931, 1027, 819, 930, 1021])
+            sparkline2.draw([515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921])
+            sparkline3.draw([15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21])
+
+        })
+
+    </script>
+
+}

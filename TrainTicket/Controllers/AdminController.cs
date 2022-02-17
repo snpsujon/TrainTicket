@@ -23,11 +23,16 @@ namespace TrainTicket.Controllers
             if (HttpContext.Session.GetString("Email") == null)
             {
                 return RedirectToAction("NotFound", "Home");
+                
             }
-            var TotalUsers = _context.userInformations.Count();
-            ViewBag.TotalUsers = TotalUsers;
-            var allusers = _context.userInformations.ToList();
-            return View(allusers);
+            if(HttpContext.Session.GetString("UserType") == "Admin")
+            {
+                var TotalUsers = _context.userInformations.Count();
+                ViewBag.TotalUsers = TotalUsers;
+                var allusers = _context.userInformations.ToList();
+                return View(allusers);
+            }
+            return RedirectToAction("NotFound", "Home");
         }
 
 
@@ -37,12 +42,18 @@ namespace TrainTicket.Controllers
             if (HttpContext.Session.GetString("Email") == null)
             {
                 return RedirectToAction("NotFound", "Home");
+                
             }
-            loadDDL();
-            UserInformation user = _context.userInformations.Find(id);
-            //var user = _context.userInformations.Where(x => x.UserID == id);
+            if (HttpContext.Session.GetString("UserType") == "Admin")
+            {
+                loadDDL();
+                UserInformation user = _context.userInformations.Find(id);
+                //var user = _context.userInformations.Where(x => x.UserID == id);
 
-            return View(user);
+                return View(user);
+            }
+            return RedirectToAction("NotFound", "Home");
+            
         }
         [HttpPost]
         public IActionResult EditUser(UserInformation userInformations)

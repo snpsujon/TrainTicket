@@ -20,9 +20,12 @@
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper container">
-        <form asp-action="Create">
+        <form asp-action="Booking">
 
-
+            <input type="text" class="form-control" placeholder=".col-3" hidden asp-for="BuyerID">
+            <input type="text" class="form-control" placeholder=".col-3" hidden asp-for="SellerID">
+            <input type="text" class="form-control" placeholder=".col-3" hidden asp-for="TicketID">
+            <input type="text" class="form-control" placeholder=".col-3" hidden asp-for="TrainName">
 
             <div class="row">
                 <div class="col-md-6">
@@ -146,18 +149,24 @@
 
                             <div class="form-group">
                                 <label for="TicketQuantity">Quantity</label>
-                                <input type="number" id="TicketQuantity" class="form-control" rows="4" asp-for="TicketQuantity" onkeyup="myFunction()">
+                                <select id="TicketQuantity" class="form-control custom-select ab" asp-for="TicketQuantity" onchange="myFunction()">
+                                    <option selected disabled>Select one</option>
+
+                                </select>
+                                @*<input type="number" id="TicketQuantity" class="form-control" rows="4" asp-for="TicketQuantity" onkeyup="myFunction()">*@
                             </div>
                             <div class="form-group">
                                 <label for="TicketTotalPrice">Total Price</label>
                                 <input type="number" id="TicketTotalPrice" class="form-control" rows="4" asp-for="TicketTotalPrice" readonly>
                             </div>
-                            
+
 
                             <div class="form-group">
                                 <label for="inputStatus">Payment Type</label>
-                                <select id="fStation" class="form-control custom-select ab">
+                                <select id="fStation" class="form-control custom-select ab" asp-for="PaymentType">
                                     <option selected disabled>Select one</option>
+                                    <option value="Bkash">Bkash</option>
+                                    <option value="Nagad">Nagad</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -181,8 +190,8 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <a href="#" class="btn btn-secondary">Cancel</a>
-                    <input type="submit" value="Create new Project" class="btn btn-success float-right">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Create Booking Request" class="btn btn-success float-right">
                 </div>
             </div>
 
@@ -190,17 +199,28 @@
 
 
 
-            </form>
+        </form>
         </div>
 
     <script>
+
+
+
+        var selectElement = document.getElementById('TicketQuantity');
+
+        var p = document.getElementById('TotalSit').value;
+
+        for (var i = 1; i<= p; i++) {
+            selectElement.add(new Option(i));
+        }
 
         
             function myFunction() {
                 var a = document.getElementById('PerTicketPrice').value;
                 var b = document.getElementById('TicketQuantity').value;
-                var c = document.getElementById('TotalSit').value;
-                var t = parseInt(c) - parseInt(b);
+                
+
+                var t = parseInt(p) - parseInt(b);
                 var s = parseInt(a) * parseInt(b);
                 document.getElementById('TotalSit').value = t;
                 document.getElementById('TicketTotalPrice').value = s;
