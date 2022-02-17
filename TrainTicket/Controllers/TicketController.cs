@@ -69,7 +69,19 @@ namespace TrainTicket.Controllers
         [HttpPost]
         public IActionResult Create(TicketInformation ticketInformations)
         {
-            _context.Add(ticketInformations);
+            var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+            TicketInformation ticket = new TicketInformation
+            {
+                TrainName = ticketInformations.TrainName,
+                JourneyTime = ticketInformations.JourneyTime,
+                PerTicketPrice = ticketInformations.PerTicketPrice,
+                TotalSit = ticketInformations.TotalSit,
+                FStarionName = ticketInformations.FStarionName,
+                TStationName = ticketInformations.TStationName,
+                SitClass = ticketInformations.SitClass,
+                SellerID = userid,
+            };
+            _context.Add(ticket);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));

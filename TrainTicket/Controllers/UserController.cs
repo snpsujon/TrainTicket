@@ -126,10 +126,13 @@ namespace TrainTicket.Controllers
 
 
             }
+
             
             
             _context.Update(userinformation);
             _context.SaveChanges();
+
+            //HttpContext.Session.SetString("UserPro", uniqueFileName);
             return RedirectToAction("UserProfile");
             
         }

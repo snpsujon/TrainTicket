@@ -124,7 +124,11 @@ namespace TrainTicket.Controllers
                 HttpContext.Session.SetString("UserName", adm.UserFullName.ToString());
                 HttpContext.Session.SetString("Email", adm.UserEmail);
                 HttpContext.Session.SetString("UserType", adm.UserType);
-                HttpContext.Session.SetString("UserPro", adm.ProfilePicture);
+                if(adm.ProfilePicture != null)
+                {
+                    HttpContext.Session.SetString("UserPro", adm.ProfilePicture);
+                }
+                
 
                 return RedirectToAction("UserProfile", "User");
             }
