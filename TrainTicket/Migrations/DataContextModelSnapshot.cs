@@ -29,8 +29,20 @@ namespace TrainTicket.Migrations
                     b.Property<DateTime>("BookedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("BookingAttachment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BookingStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("BuyerID")
                         .HasColumnType("int");
+
+                    b.Property<int>("InvoiceNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OrderID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentConfirmation")
                         .HasColumnType("nvarchar(max)");
@@ -152,6 +164,9 @@ namespace TrainTicket.Migrations
                     b.Property<int>("TotalSit")
                         .HasColumnType("int");
 
+                    b.Property<int>("TotalTicketsAllTime")
+                        .HasColumnType("int");
+
                     b.Property<string>("TrainName")
                         .HasColumnType("nvarchar(max)");
 
@@ -181,6 +196,9 @@ namespace TrainTicket.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(max)");

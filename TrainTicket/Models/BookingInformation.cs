@@ -19,7 +19,12 @@ namespace TrainTicket.Models
         public DateTime BookedTime { get; set; }
         public string PaymentType { get; set; }
         public string PaymentConfirmation { get; set; }
-        
-        
+        public string BookingStatus { get; set; }
+        public string BookingAttachment { get; set; }
+
+        public int InvoiceNumber { get; set; }
+        public string OrderID { get; set; }
+
+
     }
 }

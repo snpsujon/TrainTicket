@@ -511,3 +511,8 @@ F:\New folder\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\TrainTicket.
 F:\New folder\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\TrainTicket.dll
 F:\New folder\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\TrainTicket.pdb
 F:\New folder\Sujon\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\TrainTicket.genruntimeconfig.cache
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Booking\BookingTickets.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Booking\Details.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Booking\print.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Booking\AllBooking.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Booking\UpdateStatus.cshtml.g.cs

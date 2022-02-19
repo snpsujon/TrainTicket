@@ -21,6 +21,7 @@ namespace TrainTicket.ViewModels
         public string UserPassword { get; set; }
         public bool Deletepro { get; set; }
         public IFormFile ProfileImage { get; set; }
+        public bool IsActive { get; set; }
 
         [NotMapped]
         public string UserCPassword { get; set; }

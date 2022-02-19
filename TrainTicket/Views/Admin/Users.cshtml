@@ -80,6 +80,7 @@
                                 <th>Phone Number</th>
                                 <th>Email</th>
                                 <th>User Type</th>
+                                <th>Is Active</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -93,6 +94,24 @@
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.UserEmail)</td>
                                     <td>@Html.DisplayFor(modelItem => item.UserType)</td>
+
+                                    <td>
+                                        @if (item.IsActive == true)
+                                        {
+                                            <input type="checkbox" checked name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
+                                        }
+
+                                    </td>
+
+
+
+                                    @*<td>@Html.DisplayFor(modelItem => item.IsActive)</td>*@
+
+
                                     <td>
                                         <a asp-action="EditUser" asp-route-id="@item.UserID" class="btn btn-secondary">Edit User</a>
                                     </td>
@@ -126,6 +145,23 @@
             }
         }
     </script>
+
+
+    <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Assets/dist/js/adminlte.min.js"></script>
+
+    <script src="~/Assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script>
+        $("input[data-bootstrap-switch]").each(function () {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        })
+
+
+    </script>
+
 </body>
 </html>
 

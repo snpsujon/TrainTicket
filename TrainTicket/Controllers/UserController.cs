@@ -33,7 +33,7 @@ namespace TrainTicket.Controllers
             UserInformation userinformation = _context.userInformations.Where(x => x.UserID == userid).FirstOrDefault();
 
             //For DashBoard Graph
-            var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
+            var TotalTicket = _context.ticketInformations.OrderByDescending(p => p.TicketID).FirstOrDefault().TotalTicketsAllTime;
             var sellinformation = _context.bookingInformations.Where(x => x.SellerID == userid).ToList();
             var totalsell = sellinformation.Sum(p => p.TicketQuantity);
             var buyinformation = _context.bookingInformations.Where(x => x.BuyerID == userid).ToList();

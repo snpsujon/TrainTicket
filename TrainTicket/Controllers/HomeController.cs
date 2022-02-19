@@ -32,16 +32,17 @@ namespace TrainTicket.Controllers
             ViewBag.UserType = HttpContext.Session.GetString("UserType"); 
 
 
-            var TicInf = _context.ticketInformations.ToList();
+            var TicInf = _context.ticketInformations.Where(x=>x.TotalSit != 0).ToList();
             var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
             ViewBag.TotalTicket = TotalTicket;
             var msg = "Total Avl Ticket";
             ViewBag.msg = msg;
             var date = SearchbyDate;
 
+            
             if (date.ToString() != "1/1/0001 12:00:00 AM")
             {
-                var searchdate = _context.ticketInformations.Where(x => x.JourneyTime > date || x.JourneyTime == date).ToList();
+                var searchdate = _context.ticketInformations.Where(x => (x.JourneyTime > date && x.TotalSit != 0) || (x.JourneyTime == date && x.TotalSit != 0)).ToList();
                 if (searchdate.Count != 0)
                 {
                     var dates = SearchbyDate.ToString("dd MMMM yyyy");
@@ -89,6 +90,7 @@ namespace TrainTicket.Controllers
         [HttpPost]
         public IActionResult Create(UserInformation userInformations)
         {
+            
             var usertype = "Buyer";
             UserInformation users = new UserInformation
             {
@@ -97,6 +99,7 @@ namespace TrainTicket.Controllers
                 UserEmail = userInformations.UserEmail,
                 UserPassword = userInformations.UserPassword,
                 UserType = usertype,
+                IsActive = true,
             };
             
                 _context.Add(users);

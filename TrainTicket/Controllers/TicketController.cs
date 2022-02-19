@@ -81,22 +81,51 @@ namespace TrainTicket.Controllers
         [HttpPost]
         public IActionResult Create(TicketInformation ticketInformations)
         {
-            var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
-            TicketInformation ticket = new TicketInformation
+            if(_context.ticketInformations.Count() != 0)
             {
-                TrainName = ticketInformations.TrainName,
-                JourneyTime = ticketInformations.JourneyTime,
-                PerTicketPrice = ticketInformations.PerTicketPrice,
-                TotalSit = ticketInformations.TotalSit,
-                FStarionName = ticketInformations.FStarionName,
-                TStationName = ticketInformations.TStationName,
-                SitClass = ticketInformations.SitClass,
-                SellerID = userid,
-            };
-            _context.Add(ticket);
-            _context.SaveChanges();
+                var totaltickets = _context.ticketInformations.OrderByDescending(p=>p.TicketID).FirstOrDefault().TotalTicketsAllTime;
+                var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+                TicketInformation ticket = new TicketInformation
+                {
+                    TrainName = ticketInformations.TrainName,
+                    JourneyTime = ticketInformations.JourneyTime,
+                    PerTicketPrice = ticketInformations.PerTicketPrice,
+                    TotalSit = ticketInformations.TotalSit,
+                    FStarionName = ticketInformations.FStarionName,
+                    TStationName = ticketInformations.TStationName,
+                    SitClass = ticketInformations.SitClass,
+                    SellerID = userid,
+                    TotalTicketsAllTime = (ticketInformations.TotalSit + totaltickets)
+                };
+                _context.Add(ticket);
+                _context.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                var totaltickets = 0;
+                var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+                TicketInformation ticket = new TicketInformation
+                {
+                    TrainName = ticketInformations.TrainName,
+                    JourneyTime = ticketInformations.JourneyTime,
+                    PerTicketPrice = ticketInformations.PerTicketPrice,
+                    TotalSit = ticketInformations.TotalSit,
+                    FStarionName = ticketInformations.FStarionName,
+                    TStationName = ticketInformations.TStationName,
+                    SitClass = ticketInformations.SitClass,
+                    SellerID = userid,
+                    TotalTicketsAllTime = (ticketInformations.TotalSit + totaltickets)
+                };
+                _context.Add(ticket);
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+            
+            
         }
 
 
