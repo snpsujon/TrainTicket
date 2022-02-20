@@ -69,22 +69,23 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Qty</th>
+
                                                 <th>Train Name</th>
                                                 <th>Journey Time</th>
                                                 <th>Status</th>
                                                 <th>Per Ticket Price</th>
-
+                                                <th>Qty</th>
                                                 <th>Subtotal</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>@Model.TicketQuantity</td>
+
                                                 <td>@Model.TrainName</td>
                                                 <td>@Model.JourneyTime</td>
                                                 <td>@Model.BookingStatus</td>
                                                 <td>৳@Model.PerTicketPrice</td>
+                                                <td>@Model.TicketQuantity</td>
                                                 <td>৳@Model.TicketTotalPrice</td>
                                             </tr>
 

@@ -24,44 +24,26 @@ namespace TrainTicket.Controllers
             if (HttpContext.Session.GetString("Email") == null)
             {
                 return RedirectToAction("NotFound", "Home");
-                
+
             }
 
             if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Seller")
             {
-                var TicInf = _context.ticketInformations.ToList();
-                var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
-                ViewBag.TotalTicket = TotalTicket;
-                var msg = "Total Avl Ticket";
-                ViewBag.msg = msg;
-                var date = SearchbyDate;
-            
-                if (date.ToString() != "1/1/0001 12:00:00 AM")
-                {
-                    var searchdate = _context.ticketInformations.Where(x => x.JourneyTime > date || x.JourneyTime == date).ToList();
-                    if (searchdate.Count != 0)
-                    {
-                        var dates = SearchbyDate.ToString("dd MMMM yyyy");
-                        ViewBag.msg = "Total Avl Tickets On " + dates;
-                        TotalTicket = searchdate.Sum(p => p.TotalSit);
-                        ViewBag.TotalTicket = TotalTicket;
-                        return View(searchdate);
-                    }
-                    else
-                    {
-                        ViewBag.TotalTicket = "No Avl Ticket";
-                        return View(TicInf);
-                    }
-                }
+                var AllTicInf = _context.ticketInformations.OrderByDescending(p => p.TicketID).ToList();
+                var avlTickts = _context.ticketInformations.Where(x => x.TotalSit != 0 && (x.JourneyTime > DateTime.Now || x.JourneyTime == DateTime.Now)).OrderByDescending(p=>p.TicketID).ToList();
+                ViewData["avlTickts"] = avlTickts;
+                var expTickts = _context.ticketInformations.Where(x => x.TotalSit == 0 || x.JourneyTime < DateTime.Now).OrderByDescending(p => p.TicketID).ToList();
+                ViewData["expTickts"] = expTickts;
+                
 
-                return View(TicInf);
+                return View(AllTicInf);
             }
             return RedirectToAction("NotFound", "Home");
-            
 
 
 
-        }
+
+    }
 
         public IActionResult Create()
         {

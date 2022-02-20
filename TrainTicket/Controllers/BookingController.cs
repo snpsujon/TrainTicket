@@ -23,6 +23,8 @@ namespace TrainTicket.Controllers
             webHostEnvironment = hostEnvironment;
         }
 
+
+        //Get || Ticket Booking by buyer
         public IActionResult Booking(int id)
         {
             if (HttpContext.Session.GetString("Email") == null)
@@ -69,12 +71,11 @@ namespace TrainTicket.Controllers
             //return View();
         }
 
+
+        //Post || Ticket Booking by buyer
         [HttpPost]
         public IActionResult Booking(BookingVM booking)
         {
-
-
-
 
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[3];
@@ -123,7 +124,7 @@ namespace TrainTicket.Controllers
 
 
 
-
+        //GET || Sell All Booked By User
         public IActionResult BookingTickets()
         {
             if (HttpContext.Session.GetString("Email") == null)
@@ -132,7 +133,7 @@ namespace TrainTicket.Controllers
             }
 
             var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
-            var bookings = from a in _context.bookingInformations
+            var bookings = (from a in _context.bookingInformations
                           join b in _context.userInformations.Where(x=> x.UserID == userid)
                           on a.BuyerID equals b.UserID
                           join c in _context.userInformations
@@ -150,10 +151,52 @@ namespace TrainTicket.Controllers
                               SellerName = c.UserFullName,
                               TrainName = d.TrainName,
                               
-                          };
+                          }).OrderByDescending(p => p.BookingID);
 
             return View(bookings);
         }
+
+
+
+        //GET || See all Booking Request to the Seller
+        public IActionResult BookingRequests()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+
+            if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Seller")
+            {
+                var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+                var bookings = (from a in _context.bookingInformations
+                                join b in _context.userInformations
+                                on a.BuyerID equals b.UserID
+                                join c in _context.userInformations.Where(x => x.UserID == userid)
+                                on a.SellerID equals c.UserID
+                                join d in _context.ticketInformations
+                                on a.TicketID equals d.TicketID
+
+                                select new BookingVM
+                                {
+                                    BookedTime = a.BookedTime,
+                                    BookingID = a.BookingID,
+                                    FromStation = d.FStarionName,
+                                    ToStation = d.TStationName,
+                                    JourneyTime = d.JourneyTime,
+                                    TicketQuantity = a.TicketQuantity,
+                                    BuyerName = b.UserFullName,
+                                    TrainName = d.TrainName,
+                                    BookingStatus = a.BookingStatus,
+
+                                }).OrderByDescending(p => p.BookingID);
+
+                return View(bookings);
+            }
+            return RedirectToAction("NotFound", "Home");
+        }
+
 
         public IActionResult Details(int id)
         {
@@ -163,42 +206,51 @@ namespace TrainTicket.Controllers
             }
 
             var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
-            var bookings = (from a in _context.bookingInformations.Where(x => x.BookingID == id)
-                            join b in _context.userInformations
-                            on a.BuyerID equals b.UserID
-                            join c in _context.userInformations
-                            on a.SellerID equals c.UserID
-                            join d in _context.ticketInformations
-                            on a.TicketID equals d.TicketID
+            var valid = _context.bookingInformations.Where(x => x.BookingID == id).FirstOrDefault().BuyerID;
+            if (valid == userid)
+            {
+                var bookings = (from a in _context.bookingInformations.Where(x => x.BookingID == id)
+                                join b in _context.userInformations
+                                on a.BuyerID equals b.UserID
+                                join c in _context.userInformations
+                                on a.SellerID equals c.UserID
+                                join d in _context.ticketInformations
+                                on a.TicketID equals d.TicketID
 
-                            select new BookingVM
-                            {
-                                SellerName = c.UserFullName,
-                                SellerPhone = c.UserPhoneNumber,
-                                SellerEmail = c.UserEmail,
-
-
-                                BuyerName = b.UserFullName,
-                                BuyerPhone = b.UserPhoneNumber,
-                                BuyerEmail = b.UserEmail,
-
-                                TicketQuantity = a.TicketQuantity,
-                                TicketTotalPrice = a.TicketTotalPrice,
-                                PaymentType = a.PaymentType,
-                                PaymentConfirmation = a.PaymentConfirmation,
-                                BookedTime = a.BookedTime,
-                                OrderID = a.OrderID,
-                                InvoiceNumber = a.InvoiceNumber,
-                                BookingStatus = a.BookingStatus,
-                                BookingFile = a.BookingAttachment,
+                                select new BookingVM
+                                {
+                                    SellerName = c.UserFullName,
+                                    SellerPhone = c.UserPhoneNumber,
+                                    SellerEmail = c.UserEmail,
 
 
-                                TrainName = d.TrainName,
-                                JourneyTime = d.JourneyTime,
-                                PerTicketPrice = d.PerTicketPrice,
-                            }).FirstOrDefault();
+                                    BuyerName = b.UserFullName,
+                                    BuyerPhone = b.UserPhoneNumber,
+                                    BuyerEmail = b.UserEmail,
 
-            return View(bookings);
+                                    TicketQuantity = a.TicketQuantity,
+                                    TicketTotalPrice = a.TicketTotalPrice,
+                                    PaymentType = a.PaymentType,
+                                    PaymentConfirmation = a.PaymentConfirmation,
+                                    BookedTime = a.BookedTime,
+                                    OrderID = a.OrderID,
+                                    InvoiceNumber = a.InvoiceNumber,
+                                    BookingStatus = a.BookingStatus,
+                                    BookingFile = a.BookingAttachment,
+
+
+                                    TrainName = d.TrainName,
+                                    JourneyTime = d.JourneyTime,
+                                    PerTicketPrice = d.PerTicketPrice,
+                                }).FirstOrDefault();
+
+                return View(bookings);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+            
 
 
         }
@@ -211,44 +263,64 @@ namespace TrainTicket.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-            var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
-            var bookings = from a in _context.bookingInformations
-                           join b in _context.userInformations
-                           on a.BuyerID equals b.UserID
-                           join c in _context.userInformations
-                           on a.SellerID equals c.UserID
-                           join d in _context.ticketInformations
-                           on a.TicketID equals d.TicketID
+            if (HttpContext.Session.GetString("UserType") == "Admin")
+            {
+                var userid = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+                var bookings = (from a in _context.bookingInformations
+                                join b in _context.userInformations
+                                on a.BuyerID equals b.UserID
+                                join c in _context.userInformations
+                                on a.SellerID equals c.UserID
+                                join d in _context.ticketInformations
+                                on a.TicketID equals d.TicketID
 
-                           select new BookingVM
-                           {
-                               BookingID = a.BookingID,
-                               FromStation = d.FStarionName,
-                               ToStation = d.TStationName,
-                               JourneyTime = d.JourneyTime,
-                               TicketQuantity = a.TicketQuantity,
-                               BuyerName = b.UserFullName,
-                               TrainName = d.TrainName,
-                               SellerName = c.UserFullName,
-                               BookingStatus = a.BookingStatus,
+                                select new BookingVM
+                                {
+                                    BookingID = a.BookingID,
+                                    FromStation = d.FStarionName,
+                                    ToStation = d.TStationName,
+                                    JourneyTime = d.JourneyTime,
+                                    TicketQuantity = a.TicketQuantity,
+                                    BuyerName = b.UserFullName,
+                                    TrainName = d.TrainName,
+                                    SellerName = c.UserFullName,
+                                    BookingStatus = a.BookingStatus,
 
-                           };
+                                }).OrderByDescending(p => p.BookingID);
 
-            return View(bookings);
+                return View(bookings);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+
+                
         }
 
 
         public IActionResult UpdateStatus(int id)
         {
-
-            var booking = _context.bookingInformations.Where(x => x.BookingID == id).FirstOrDefault();
-            BookingVM booked = new BookingVM
+            if (HttpContext.Session.GetString("Email") == null)
             {
-                BookingID = booking.BookingID,
+                return RedirectToAction("Login", "Home");
+            }
+            if (HttpContext.Session.GetString("UserType") == "Admin" || HttpContext.Session.GetString("UserType") == "Seller")
+            {
+                var booking = _context.bookingInformations.Where(x => x.BookingID == id).FirstOrDefault();
+                BookingVM booked = new BookingVM
+                {
+                    BookingID = booking.BookingID,
 
-            };
+                };
 
-            return View(booked);
+                return View(booked);
+            }
+            else
+            {
+                return RedirectToAction("NotFound", "Home");
+            }
+                
         }
         [HttpPost]
         public IActionResult UpdateStatus(BookingVM model)
@@ -264,7 +336,7 @@ namespace TrainTicket.Controllers
             _context.SaveChanges();
 
 
-            return RedirectToAction("AllBooking");
+            return RedirectToAction("Index","Home");
         }
 
 

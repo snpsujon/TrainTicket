@@ -1,0 +1,116 @@
+﻿@model IEnumerable<TrainTicket.ViewModels.BookingVM>
+
+@{
+    ViewData["Title"] = "Booking";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | DataTables</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Booking Informations</h3><br />
+
+
+            </div>
+            <div class="card-body">
+                <div id="example1" class="dataTables_wrapper dt-bootstrap4 table-responsive">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search By Station name.." title="Type in a Station name" class="float-right">
+                    <table id="example1_wrapper" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Booking Date</th>
+                                <th>From Station</th>
+                                <th>To Station</th>
+                                <th>Train Name</th>
+                                <th>Journey Time</th>
+                                
+                                <th>Buyer Name</th>#
+                                <th>Status</th>
+                                <th>Buy Tickets</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                var bookingdate = item.BookedTime.ToString("dddd, dd MMMM yyyy");
+                                var joueneydate = item.JourneyTime.ToString("dddd, dd MMMM yyyy");
+                            <tr>
+                                <td>
+                                    @bookingdate
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FromStation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ToStation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TrainName)
+                                </td>
+                                <td>
+                                    @joueneydate
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BuyerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BookingStatus)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketQuantity)
+                                </td>
+
+                                <td>
+                                    <a asp-action="UpdateStatus" asp-route-id="@item.BookingID" class="btn btn-secondary" >Update Status</a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("example1_wrapper");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

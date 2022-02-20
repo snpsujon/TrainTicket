@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<TrainTicket.Models.UserInformation>
 
 @{
+    IEnumerable<TrainTicket.Models.UserInformation> ActiveUsers = ViewData["act"] as IEnumerable<TrainTicket.Models.UserInformation>;
+    IEnumerable<TrainTicket.Models.UserInformation> InactiveUsers = ViewData["inact"] as IEnumerable<TrainTicket.Models.UserInformation>;
+}
+
+@{
     ViewData["Title"] = "Users";
     Layout = "~/Views/Shared/_MyLayout.cshtml";
 
 
 }
-
-
 
 
 
@@ -18,23 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | DataTables</title>
 
-    <style>
-
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            background: transparent;
-            bottom: 0;
-            color: transparent;
-            cursor: pointer;
-            height: auto;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: auto;
-        }
-    </style>
-
-
+    <link href="~/Assets/mystyle.css" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -42,110 +29,194 @@
 
 </head>
 <body class="hold-transition sidebar-mini">
-    <div class="wrapper">
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">All Users</button>
+        <button class="tablinks" onclick="openCity(event, 'Paris')">Active Users</button>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Inactive Users</button>
+
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search By Email.." title="Type in a name" class="topright">
 
 
+    </div>
 
-
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Users Informations</h3><br />
-                <a asp-controller="Home" asp-action="Create" class="btn btn-success">Create New User</a>
-                <div class="col-12 col-sm-4 float-right">
-                    <div class="info-box bg-light">
-                        <div class="info-box-content">
-                            <span class="info-box-text text-center text-muted">Total Users</span>
-
-                            <span id="not" class="info-box-number text-center mb-0">@ViewBag.TotalUsers</span>
-
-
-
+    <div id="London" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+        <div class="wrapper">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Users Informations</h3><br />
+                    <a asp-controller="Home" asp-action="Create" class="btn btn-success">Create New User</a>
+                    <div class="col-12 col-sm-4 float-right">
+                        <div class="info-box bg-light">
+                            <div class="info-box-content">
+                                <span class="info-box-text text-center text-muted">Total Users</span>
+                                <span id="not" class="info-box-number text-center mb-0">@ViewBag.TotalUsers</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-
-
-
-
-                <div id="example1" class="dataTables_wrapper dt-bootstrap4">
-                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search By Email.." title="Type in a name" class="float-right">
-
-
-                    <table id="example1_wrapper" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Full Name</th>
-                                <th>Phone Number</th>
-                                <th>Email</th>
-                                <th>User Type</th>
-                                <th>Is Active</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+                <div class="card-body">
+                    <div id="example1" class="dataTables_wrapper dt-bootstrap4 table-responsive">
+                        <table id="example1_wrapper" class="table table-bordered table-striped">
+                            <thead>
                                 <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.UserFullName)</td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UserPhoneNumber)
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.UserEmail)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.UserType)</td>
-
-                                    <td>
-                                        @if (item.IsActive == true)
-                                        {
-                                            <input type="checkbox" checked name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
-                                        }
-                                        else
-                                        {
-                                            <input type="checkbox" name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
-                                        }
-
-                                    </td>
-
-
-
-                                    @*<td>@Html.DisplayFor(modelItem => item.IsActive)</td>*@
-
-
-                                    <td>
-                                        <a asp-action="EditUser" asp-route-id="@item.UserID" class="btn btn-secondary">Edit User</a>
-                                    </td>
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>User Type</th>
+                                    <th>Is Active</th>
+                                    <th>Action</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                                {
+
+                                    <tr>
+                                        <td>@item.Index</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserFullName)</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Data.UserEmail)
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserPhoneNumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserType)</td>
+                                        <td>
+                                            @if (item.Data.IsActive == true)
+                                            {
+                                                <input type="checkbox" checked name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
+                                            }
+                                        </td>
+
+                                        <td>
+                                            <a asp-action="EditUser" asp-route-id="@item.Data.UserID" class="btn btn-secondary">Edit</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div id="Paris" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+        <div class="wrapper">
+            <div class="card">
+
+                <div class="card-body">
+                    <div id="example1" class="dataTables_wrapper dt-bootstrap4 table-responsive">
+                        <table id="example2_wrapper" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>User Type</th>
+                                    <th>Is Active</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ActiveUsers.Select((x, i) => new { Data = x, Index = i + 1 }))
+                                {
+
+                                    <tr>
+                                        <td>@item.Index</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserFullName)</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Data.UserEmail)
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserPhoneNumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserType)</td>
+                                        <td>
+                                            @if (item.Data.IsActive == true)
+                                            {
+                                                <input type="checkbox" checked name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
+                                            }
+                                        </td>
+
+                                        <td>
+                                            <a asp-action="EditUser" asp-route-id="@item.Data.UserID" class="btn btn-secondary">Edit</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="Tokyo" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+        <div class="wrapper">
+            <div class="card">
 
+                <div class="card-body">
+                    <div id="example1" class="dataTables_wrapper dt-bootstrap4 table-responsive">
+                        <table id="example3_wrapper" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>User Type</th>
+                                    <th>Is Active</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in InactiveUsers.Select((x, i) => new { Data = x, Index = i + 1 }))
+                                {
 
-    <script>
-        function myFunction() {
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("example1_wrapper");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[2];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>
+                                    <tr>
+                                        <td>@item.Index</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserFullName)</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Data.UserEmail)
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserPhoneNumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Data.UserType)</td>
+                                        <td>
+                                            @if (item.Data.IsActive == true)
+                                            {
+                                                <input type="checkbox" checked name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="my-checkbox" data-bootstrap-switch data-off-color="danger" data-on-color="success" disabled>
+                                            }
+                                        </td>
 
+                                        <td>
+                                            <a asp-action="EditUser" asp-route-id="@item.Data.UserID" class="btn btn-secondary">Edit</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -154,7 +225,79 @@
     <script src="~/Assets/dist/js/adminlte.min.js"></script>
 
     <script src="~/Assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
     <script>
+        document.getElementById("defaultOpen").click();
+
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("example1_wrapper");
+            table1 = document.getElementById("example2_wrapper");
+            table2 = document.getElementById("example3_wrapper");
+
+            tr = table.getElementsByTagName("tr");
+            tr1 = table1.getElementsByTagName("tr");
+            tr2 = table2.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+
+            for (i = 0; i < tr1.length; i++) {
+                td = tr1[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr1[i].style.display = "";
+                    } else {
+                        tr1[i].style.display = "none";
+                    }
+                }
+            }
+
+
+
+            for (i = 0; i < tr2.length; i++) {
+                td = tr2[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr2[i].style.display = "";
+                    } else {
+                        tr2[i].style.display = "none";
+                    }
+                }
+            }
+
+        }
+
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+ 
+
+
+
+
+
         $("input[data-bootstrap-switch]").each(function () {
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
         })

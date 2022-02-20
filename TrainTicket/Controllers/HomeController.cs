@@ -31,9 +31,9 @@ namespace TrainTicket.Controllers
             ViewBag.UserEmail = HttpContext.Session.GetString("Email"); 
             ViewBag.UserType = HttpContext.Session.GetString("UserType"); 
 
-
-            var TicInf = _context.ticketInformations.Where(x=>x.TotalSit != 0).ToList();
-            var TotalTicket = _context.ticketInformations.Sum(p => p.TotalSit);
+            
+            var TicInf = _context.ticketInformations.Where(x=>x.TotalSit != 0 && (x.JourneyTime > DateTime.Now || x.JourneyTime == DateTime.Now)).OrderByDescending(p => p.TicketID).ToList();
+            var TotalTicket = TicInf.Sum(p => p.TotalSit);
             ViewBag.TotalTicket = TotalTicket;
             var msg = "Total Avl Ticket";
             ViewBag.msg = msg;
@@ -114,6 +114,11 @@ namespace TrainTicket.Controllers
 
         public IActionResult Login()
         {
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.error = "I";
             return View();
         }
         [HttpPost]
@@ -121,24 +126,41 @@ namespace TrainTicket.Controllers
         {
             var adm = _context.userInformations.FirstOrDefault(x => x.UserEmail == UserEmail && x.UserPassword == UserPassword);
             ViewBag.pp = adm;
-            if (adm != null)
-            {
-                HttpContext.Session.SetString("UserID", adm.UserID.ToString());
-                HttpContext.Session.SetString("UserName", adm.UserFullName.ToString());
-                HttpContext.Session.SetString("Email", adm.UserEmail);
-                HttpContext.Session.SetString("UserType", adm.UserType);
-                if(adm.ProfilePicture != null)
-                {
-                    HttpContext.Session.SetString("UserPro", adm.ProfilePicture);
-                }
-                
 
-                return RedirectToAction("Index", "Home");
+            if(adm != null)
+            {
+                if(adm.IsActive != false)
+                {
+                    HttpContext.Session.SetString("UserID", adm.UserID.ToString());
+                    HttpContext.Session.SetString("UserName", adm.UserFullName.ToString());
+                    HttpContext.Session.SetString("Email", adm.UserEmail);
+                    HttpContext.Session.SetString("UserType", adm.UserType);
+                    if (adm.ProfilePicture != null)
+                    {
+                        HttpContext.Session.SetString("UserPro", adm.ProfilePicture);
+                    }
+                    ViewBag.error = "I";
+                    
+                    //if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    //    return Redirect(returnUrl);
+                    //else
+                    //    return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
+                    
+                    
+                }
+                else
+                {
+                    ViewBag.error = "You Are Blocked By Admin";
+                    return View();
+                }
             }
             else
             {
+                ViewBag.error = "Email or Password Not Found";
                 return View();
             }
+
 
 
         }
@@ -160,7 +182,10 @@ namespace TrainTicket.Controllers
         }
 
 
-
+        public IActionResult test()
+        {
+            return View();
+        }
 
 
 

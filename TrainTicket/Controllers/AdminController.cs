@@ -27,9 +27,15 @@ namespace TrainTicket.Controllers
             }
             if(HttpContext.Session.GetString("UserType") == "Admin")
             {
+
                 var TotalUsers = _context.userInformations.Count();
                 ViewBag.TotalUsers = TotalUsers;
                 var allusers = _context.userInformations.ToList();
+                var activeUsers = _context.userInformations.Where(x => x.IsActive == true);
+                ViewData["act"] = activeUsers;
+               
+                var InactiveUsers = _context.userInformations.Where(x => x.IsActive == false);
+                ViewData["inact"] = InactiveUsers;
                 return View(allusers);
             }
             return RedirectToAction("NotFound", "Home");

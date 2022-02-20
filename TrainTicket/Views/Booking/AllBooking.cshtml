@@ -30,7 +30,7 @@
 
             </div>
             <div class="card-body">
-                <div id="example1" class="dataTables_wrapper dt-bootstrap4">
+                <div id="example1" class="dataTables_wrapper dt-bootstrap4 table-responsive">
                     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search By Station name.." title="Type in a Station name" class="float-right">
                     <table id="example1_wrapper" class="table table-bordered table-striped">
                         <thead>
@@ -40,7 +40,7 @@
                                 <th>Train Name</th>
                                 <th>Journey Time</th>
                                 <th>Seller Name</th>
-                                <th>Buyer Name</th>
+                                <th>Buyer Name</th>#
                                 <th>Status</th>
                                 <th>Buy Tickets</th>
                                 <th>Action</th>
@@ -49,37 +49,42 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FromStation)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ToStation)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TrainName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.JourneyTime)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SellerName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.BuyerName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.BookingStatus)
-                                    </td>
+                                var bookingdate = item.BookedTime.ToString("dddd, dd MMMM yyyy");
+                                var joueneydate = item.JourneyTime.ToString("dddd, dd MMMM yyyy");
+                            <tr>
+                                <td>
+                                    @bookingdate
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FromStation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ToStation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TrainName)
+                                </td>
+                                <td>
+                                    @joueneydate
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SellerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BuyerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BookingStatus)
+                                </td>
 
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TicketQuantity)
-                                    </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketQuantity)
+                                </td>
 
-                                    <td>
-                                        <a asp-action="UpdateStatus" asp-route-id="@item.BookingID" class="btn btn-secondary">Update Status</a>
-                                    </td>
-                                </tr>
+                                <td>
+                                    <a asp-action="UpdateStatus" asp-route-id="@item.BookingID" class="btn btn-secondary">Update Status</a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
