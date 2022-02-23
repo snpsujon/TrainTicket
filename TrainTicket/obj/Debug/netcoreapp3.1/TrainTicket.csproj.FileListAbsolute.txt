@@ -694,3 +694,5 @@ F:\New folder\Sujon\train\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\TrainT
 F:\New folder\Sujon\train\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\TrainTicket.genruntimeconfig.cache
 F:\New folder\Sujon\train\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Booking\BookingRequests.cshtml.g.cs
 F:\New folder\Sujon\train\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Home\test.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Booking\BookingRequests.cshtml.g.cs
+D:\Project\MVC Project\TrainTicket\TrainTicket\obj\Debug\netcoreapp3.1\Razor\Views\Home\test.cshtml.g.cs

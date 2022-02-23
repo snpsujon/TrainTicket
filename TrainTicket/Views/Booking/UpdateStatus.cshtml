@@ -31,10 +31,11 @@
             <form enctype="multipart/form-data" asp-action="UpdateStatus">
                 <div class="row">
                     <input asp-for="BookingID" class="form-control" hidden />
+                    <input asp-for="TicketID" class="form-control" hidden />
                     <div class="col-md-6">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Edit User Informations</h3>
+                                <h3 class="card-title">Update Booking Status</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -45,7 +46,7 @@
                             <div class="card-body">
 
                                 <div class="form-group">
-                                    <label for="inputClientCompany">Class</label>
+                                    <label for="inputClientCompany">Booking Status</label>
                                     <select id="sit" class="form-control select2bs4 ab" asp-for="BookingStatus" required style="width: 100%;">
                                         <option selected disabled>Select one</option>
                                         <option>Pending</option>
@@ -56,7 +57,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="inputProjectLeader">Profile Picture</label>
+                                    <label for="inputProjectLeader">Booking Tickets</label>
                                     <div class="custom-file">
                                         <input asp-for="BookingAttachment" class="custom-file-input" id="customFile">
                                         <label class="custom-file-label" for="customFile">Choose file</label>

@@ -311,6 +311,7 @@ namespace TrainTicket.Controllers
                 BookingVM booked = new BookingVM
                 {
                     BookingID = booking.BookingID,
+                    TicketID = booking.TicketID,
 
                 };
 
@@ -328,11 +329,20 @@ namespace TrainTicket.Controllers
             string uniqueFileName = UploadedFile(model);
             //var bookingid = Convert.ToInt32(model.BookingID);
             BookingInformation booking = _context.bookingInformations.Where(x => x.BookingID == model.BookingID).FirstOrDefault();
+            TicketInformation ticket = _context.ticketInformations.Where(x => x.TicketID == model.TicketID).FirstOrDefault();
 
+
+            if(model.BookingStatus == "Decline")
+            {
+                ticket.TotalSit = ticket.TotalSit + booking.TicketQuantity;
+            }
+
+            
             booking.BookingAttachment = uniqueFileName;
             booking.BookingStatus = model.BookingStatus;
 
             _context.Update(booking);
+            _context.Update(ticket);
             _context.SaveChanges();
 
 
